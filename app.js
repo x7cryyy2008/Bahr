@@ -370,16 +370,26 @@
     if (!cfg || !r) { console.warn('BahrNotify: استدعِ mount أولاً وتأكد من وجود العنصر', sel); return false; }
     r.classList.add('bnx-v', 'bnx-pg'); attach(r); views.push({ root: r, page: true }); paint();
     return true;
-  }
+  function bahrBoot() {
+    // تشغيل الإشعارات بأمان
+    if (document.querySelector('#admNtfBell')) {
+        BahrNotify.mount({ bell: '#admNtfBell' });
+    }
+    
+    // تشغيل فريق العمل أو لوحة الإدارة بأمان إذا وجد العنصر
+    if (document.querySelector('#admTeamPage')) {
+        BahrTeam.mount({ root: '#admTeamPage', trigger: '#admTeamBtn', hideWhileOpen: '#admTeamClose' });
+    }
+    
+    const admBtn = document.getElementById('admTeamBtn');
+    if (admBtn) {
+        admBtn.style.display = '';
+    }
+}
 
   w.BahrNotify = { mount: mount, mountPage: mountPage, refresh: load, push: push, unread: unread };
 })(window, document);
-function bahrBoot() {
-  BahrNotify.mount({ bell: '#admNtfBell' });
-  if (BahrTeam.mount({ root: '#admTeamPage', trigger: '#admTeamBtn', hideWhileOpen: '#adm', autoCloseOn: ['#adn', '#adsub'] })) {
-    document.getElementById('admTeamBtn').style.display = '';
-  }
-}
+
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bahrBoot); else bahrBoot();
 /* ===== ADM11 — BahrNotify: وحدة إشعارات مستقلة (الصقها كما هي في نهاية app.js) =====
    - مستقلة تماماً: تحقن تنسيقها بنفسها (بادئة bnx-) ولا تحتاج تعديل style.css.
