@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#06193A">
-<meta name="bahr-version" content="0.2.0">
-<link rel="icon" href="favicon.png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="color-scheme" content="light">
-<title>بحر | BAHR — البحر يجمعنا</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#06193A">
+  <meta name="bahr-version" content="0.2.0">
+  <link rel="icon" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="color-scheme" content="light">
+  <title>بحر | BAHR — البحر يجمعنا</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- ============ إعدادات Supabase (من B1، دون تغيير) ============
+  <!-- ============ إعدادات Supabase (من B1، دون تغيير) ============
      الرابط والمفتاح العام (anon) فقط. لا تضع مفتاح service_role هنا أبدًا. -->
 
 
 
-<!-- ============ صور المنصة: ضع رابط صورة الغلاف هنا لاستبدال المكان المؤقت ============ -->
-<!-- ============ B12: بيانات مركز المساعدة (ثابتة) ============
+  <!-- ============ صور المنصة: ضع رابط صورة الغلاف هنا لاستبدال المكان المؤقت ============ -->
+  <!-- ============ B12: بيانات مركز المساعدة (ثابتة) ============
   لإضافة مقال جديد: انسخ أي عنصر داخل arts وغيّر id (حروف إنجليزية صغيرة وأرقام وشرطات فقط) ثم c (معرّف التصنيف)
   وt العنوان وs الملخص وimg الصورة (اتركها '' لعرض أيقونة التصنيف) وcap وصف الصورة وdate وtags كلمات للبحث.
   b هو المحتوى: ['h','عنوان فرعي'] ['p','فقرة'] ['ul',['بند','بند']] ['note','تنبيه'] ['dl',[['مصطلح','تعريف']]]
@@ -27,285 +27,946 @@
   لا حاجة لتعديل أي كود آخر: الصفحة الرئيسية للمركز والبحث وصفحات المقالات تُبنى تلقائياً من هذه البيانات. -->
 
 
-<!-- 1) إعداد Supabase (يُحمَّل أولاً) -->
-<script src="supabase-config.js"></script>
-<!-- 2) مكتبة Supabase عبر CDN -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js" defer></script>
-<!-- 3) التصاميم -->
-<link rel="stylesheet" href="style.css">
+  <!-- 2) مكتبة Supabase عبر CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js" defer></script>
+  <!-- 3) التصاميم -->
+  <link rel="stylesheet" href="style.css">
 
 
 
 </head>
+
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-<symbol id="i-boat" viewBox="0 0 24 24"><path d="M3 16h18l-2.5 4h-13z"/><path d="M12 3v10"/><path d="M12 4l6 8h-6"/></symbol>
-<symbol id="i-jetski" viewBox="0 0 24 24"><path d="M2 16c2 0 3-2 6-2h8c3 0 4 2 6 2l-1 3H4z"/><path d="M9 14l1-4h4l2 4"/><path d="M12 10V7h3"/></symbol>
-<symbol id="i-engine" viewBox="0 0 24 24"><rect x="8" y="3" width="7" height="6" rx="1"/><path d="M11.5 9v8"/><path d="M8 17h7"/><path d="M9.5 17v4M13.5 17v4"/></symbol>
-<symbol id="i-parts" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></symbol>
-<symbol id="i-wrench" viewBox="0 0 24 24"><path d="M21 7a5 5 0 01-7 4.6L6 19.5a2 2 0 01-3-3l7.9-8A5 5 0 0116.5 3L13 6.5l1 3 3 1z"/></symbol>
-<symbol id="i-tech" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/><circle cx="12" cy="10" r="2"/></symbol>
-<symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 21c0-4 3-7 7-7s7 3 7 7"/></symbol>
-<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.5-4.5"/></symbol>
-<symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
-<symbol id="i-hand" viewBox="0 0 24 24"><path d="M3 12l5-4 4 2 4-2 5 4-6 6-3-1-3 1z"/></symbol>
-<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></symbol>
-<symbol id="i-truck" viewBox="0 0 24 24"><path d="M2 6h12v10H2zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></symbol>
-<symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6-5.5-6-11a6 6 0 1112 0c0 5.5-6 11-6 11z"/><circle cx="12" cy="10" r="2"/></symbol>
-<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
-<symbol id="i-plus" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M12 8v8M8 12h8"/></symbol>
-<symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 8.5l5 3.5-5 3.5z"/></symbol>
-<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
-<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
-<symbol id="i-eyeoff" viewBox="0 0 24 24"><path d="M3 3l18 18M10.6 6.2A9.6 9.6 0 0112 6c6 0 10 6 10 6a17 17 0 01-3.2 3.8M6.6 7.6A17 17 0 002 12s4 7 10 7a9.5 9.5 0 004-.9"/></symbol>
-<symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
-<symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 018-2.8A4.5 4.5 0 0120 10c0 5.8-8 11-8 11z"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 9a6 6 0 0112 0c0 6 2 7 2 7H4s2-1 2-7M10 19a2 2 0 004 0"/></symbol><symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
-</svg>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-boat" viewBox="0 0 24 24">
+      <path d="M3 16h18l-2.5 4h-13z" />
+      <path d="M12 3v10" />
+      <path d="M12 4l6 8h-6" />
+    </symbol>
+    <symbol id="i-jetski" viewBox="0 0 24 24">
+      <path d="M2 16c2 0 3-2 6-2h8c3 0 4 2 6 2l-1 3H4z" />
+      <path d="M9 14l1-4h4l2 4" />
+      <path d="M12 10V7h3" />
+    </symbol>
+    <symbol id="i-engine" viewBox="0 0 24 24">
+      <rect x="8" y="3" width="7" height="6" rx="1" />
+      <path d="M11.5 9v8" />
+      <path d="M8 17h7" />
+      <path d="M9.5 17v4M13.5 17v4" />
+    </symbol>
+    <symbol id="i-parts" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="3.5" />
+      <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1" />
+    </symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24">
+      <path d="M21 7a5 5 0 01-7 4.6L6 19.5a2 2 0 01-3-3l7.9-8A5 5 0 0116.5 3L13 6.5l1 3 3 1z" />
+    </symbol>
+    <symbol id="i-tech" viewBox="0 0 24 24">
+      <rect x="3" y="4" width="18" height="12" rx="2" />
+      <path d="M8 20h8M12 16v4" />
+      <circle cx="12" cy="10" r="2" />
+    </symbol>
+    <symbol id="i-user" viewBox="0 0 24 24">
+      <circle cx="12" cy="8" r="3.5" />
+      <path d="M5 21c0-4 3-7 7-7s7 3 7 7" />
+    </symbol>
+    <symbol id="i-search" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="6.5" />
+      <path d="M20 20l-4.5-4.5" />
+    </symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24">
+      <path d="M4 5h16v11H9l-5 4z" />
+    </symbol>
+    <symbol id="i-hand" viewBox="0 0 24 24">
+      <path d="M3 12l5-4 4 2 4-2 5 4-6 6-3-1-3 1z" />
+    </symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24">
+      <path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z" />
+      <path d="M8.5 12l2.5 2.5 4.5-5" />
+    </symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24">
+      <path d="M2 6h12v10H2zM14 10h4l3 3v3h-7" />
+      <circle cx="7" cy="17" r="2" />
+      <circle cx="17" cy="17" r="2" />
+    </symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24">
+      <path d="M12 21s-6-5.5-6-11a6 6 0 1112 0c0 5.5-6 11-6 11z" />
+      <circle cx="12" cy="10" r="2" />
+    </symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24">
+      <path d="M19 12H5M11 6l-6 6 6 6" />
+    </symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24">
+      <rect x="4" y="4" width="16" height="16" rx="3" />
+      <path d="M12 8v8M8 12h8" />
+    </symbol>
+    <symbol id="i-play" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M10 8.5l5 3.5-5 3.5z" />
+    </symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7v5l3 2" />
+    </symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24">
+      <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z" />
+      <circle cx="12" cy="12" r="3" />
+    </symbol>
+    <symbol id="i-eyeoff" viewBox="0 0 24 24">
+      <path
+        d="M3 3l18 18M10.6 6.2A9.6 9.6 0 0112 6c6 0 10 6 10 6a17 17 0 01-3.2 3.8M6.6 7.6A17 17 0 002 12s4 7 10 7a9.5 9.5 0 004-.9" />
+    </symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24">
+      <path d="M4 7h16M4 12h16M4 17h16" />
+    </symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24">
+      <path d="M12 21s-8-5.2-8-11a4.5 4.5 0 018-2.8A4.5 4.5 0 0120 10c0 5.8-8 11-8 11z" />
+    </symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24">
+      <path d="M6 9a6 6 0 0112 0c0 6 2 7 2 7H4s2-1 2-7M10 19a2 2 0 004 0" />
+    </symbol>
+    <symbol id="i-close" viewBox="0 0 24 24">
+      <path d="M6 6l12 12M18 6L6 18" />
+    </symbol>
+  </svg>
 
-<header class="top"><div class="wrap bar">
-  <a class="brand" href="#home" aria-label="بحر"><img src="logo-white.png" alt="بحر"></a>
-  <nav id="nav" aria-label="التنقل الرئيسي">
-    <a href="#home" data-n="h" class="on">الرئيسية</a><a href="#market" data-n="m">السوق البحري</a><a href="#requests" data-n="rq">أطلب اللي تحتاجه</a><!-- BAHR-NAV-PRICES: مكان محجوز لرابط قسم الأسعار لاحقاً (لا يُضاف الآن). مثال: <a href="#prices" data-n="pr">الأسعار</a> بين «أطلب اللي تحتاجه» و«المساعدة» --><a href="#help" data-n="i2">المساعدة</a>
-    <a class="am" data-a="out" href="#login">تسجيل الدخول</a><a class="am" data-a="out" href="#signup">إنشاء حساب</a>
-    <div class="acg" id="acg">
-      <p class="acg-h" data-a="in">حسابي كزبون</p>
-      <a class="am" data-a="in" href="#account">حسابي</a><a class="am" data-a="in" href="#favorites">المفضلة</a><a class="am" data-a="in" href="#searches">البحوث المحفوظة</a><a class="am" data-a="in" href="#alerts">التنبيهات</a><a class="am" data-a="in" href="#inbox">الرسائل</a>
-      <p class="acg-h" data-a="in">البيع والأنشطة التجارية</p>
-      <a class="am" data-a="in" href="#newlisting">إضافة إعلان</a><a class="am" data-a="in" href="#mylistings">إعلاناتي</a><a class="am" data-a="in" id="bizLink" href="#business">سجّل نشاطك التجاري</a><a class="am" data-a="in" id="bizPartsLink" href="#bizparts" style="display:none">عروض قطع الغيار</a>
-      <p class="acg-h" id="acgAdm" style="display:none">الإدارة</p>
-      <a class="am" id="admLinkM" href="#admin" style="display:none">لوحة المشرف</a><a class="am" id="admBizLink" href="#admbiz" style="display:none">الأنشطة التجارية (مشرف)</a><a class="am" id="admSvcLink" href="#admsvc" style="display:none">الخدمات البحرية (مشرف)</a><a class="am" id="admPartsLink" href="#admparts" style="display:none">قطع الغيار (مشرف)</a><a class="am" id="admReqLink" href="#admreq" style="display:none">طلبات (مشرف)</a><a class="am" id="admBuyLink" href="#admbuy" style="display:none">طلبات الشراء والعروض (مشرف)</a><a class="am" id="admRevLink" href="#admreviews" style="display:none">تقييمات (مشرف)</a><a class="am" id="admStatLink" href="#admstats" style="display:none">إحصائيات (مشرف)</a>
-      <a class="am" data-a="in" href="#home" data-act="logout">تسجيل الخروج</a>
+  <header class="top">
+    <div class="wrap bar">
+      <a class="brand" href="#home" aria-label="بحر"><img src="logo-white.png" alt="بحر"></a>
+      <nav id="nav" aria-label="التنقل الرئيسي">
+        <a href="#home" data-n="h" class="on">الرئيسية</a><a href="#market" data-n="m">السوق البحري</a><a
+          href="#requests" data-n="rq">أطلب اللي
+          تحتاجه</a><!-- BAHR-NAV-PRICES: مكان محجوز لرابط قسم الأسعار لاحقاً (لا يُضاف الآن). مثال: <a href="#prices" data-n="pr">الأسعار</a> بين «أطلب اللي تحتاجه» و«المساعدة» --><a
+          href="#help" data-n="i2">المساعدة</a>
+        <a class="am" data-a="out" href="#login">تسجيل الدخول</a><a class="am" data-a="out" href="#signup">إنشاء
+          حساب</a>
+        <div class="acg" id="acg">
+          <p class="acg-h" data-a="in">حسابي كزبون</p>
+          <a class="am" data-a="in" href="#account">حسابي</a><a class="am" data-a="in" href="#favorites">المفضلة</a><a
+            class="am" data-a="in" href="#searches">البحوث المحفوظة</a><a class="am" data-a="in"
+            href="#alerts">التنبيهات</a><a class="am" data-a="in" href="#inbox">الرسائل</a>
+          <p class="acg-h" data-a="in">البيع والأنشطة التجارية</p>
+          <a class="am" data-a="in" href="#newlisting">إضافة إعلان</a><a class="am" data-a="in"
+            href="#mylistings">إعلاناتي</a><a class="am" data-a="in" id="bizLink" href="#business">سجّل نشاطك
+            التجاري</a><a class="am" data-a="in" id="bizPartsLink" href="#bizparts" style="display:none">عروض قطع
+            الغيار</a>
+          <p class="acg-h" id="acgAdm" style="display:none">الإدارة</p>
+          <a class="am" id="admLinkM" href="#admin" style="display:none">لوحة المشرف</a><a class="am" id="admBizLink"
+            href="#admbiz" style="display:none">الأنشطة التجارية (مشرف)</a><a class="am" id="admSvcLink" href="#admsvc"
+            style="display:none">الخدمات البحرية (مشرف)</a><a class="am" id="admPartsLink" href="#admparts"
+            style="display:none">قطع الغيار (مشرف)</a><a class="am" id="admReqLink" href="#admreq"
+            style="display:none">طلبات (مشرف)</a><a class="am" id="admBuyLink" href="#admbuy" style="display:none">طلبات
+            الشراء والعروض (مشرف)</a><a class="am" id="admRevLink" href="#admreviews" style="display:none">تقييمات
+            (مشرف)</a><a class="am" id="admStatLink" href="#admstats" style="display:none">إحصائيات (مشرف)</a>
+          <a class="am" data-a="in" href="#home" data-act="logout">تسجيل الخروج</a>
+        </div>
+      </nav>
+      <div class="acts"><a class="btn btn-o" id="admLink" href="#admin" style="display:none">لوحة المشرف</a><button
+          class="btn btn-o" data-a="in" data-act="acct" type="button" aria-haspopup="true" aria-expanded="false"
+          aria-controls="acg">حسابي ▾</button><button class="btn btn-o" data-a="out" data-go="#login"
+          type="button">تسجيل الدخول</button><button class="btn btn-p" data-a="out" data-go="#signup"
+          type="button">إنشاء حساب</button></div>
+      <div class="hq"><a href="#find" aria-label="البحث"><svg class="ic">
+            <use href="#i-search" />
+          </svg></a><a class="hq-u" data-a="out" href="#login" aria-label="تسجيل الدخول"><svg class="ic">
+            <use href="#i-user" />
+          </svg></a><a class="hq-u" data-a="in" href="#account" aria-label="حسابي"><svg class="ic">
+            <use href="#i-user" />
+          </svg></a><a data-a="in" href="#favorites" aria-label="المفضلة"><svg class="ic">
+            <use href="#i-heart" />
+          </svg></a><a data-a="in" href="#alerts" id="bell" aria-label="التنبيهات" aria-haspopup="true"
+          aria-expanded="false" aria-controls="nfp"><svg class="ic">
+            <use href="#i-bell" />
+          </svg><b id="bc" hidden>0</b></a></div>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav" aria-label="القائمة"><svg
+          class="ic">
+          <use href="#i-menu" />
+        </svg></button>
     </div>
-  </nav>
-  <div class="acts"><a class="btn btn-o" id="admLink" href="#admin" style="display:none">لوحة المشرف</a><button class="btn btn-o" data-a="in" data-act="acct" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="acg">حسابي ▾</button><button class="btn btn-o" data-a="out" data-go="#login" type="button">تسجيل الدخول</button><button class="btn btn-p" data-a="out" data-go="#signup" type="button">إنشاء حساب</button></div>
-  <div class="hq"><a href="#find" aria-label="البحث"><svg class="ic"><use href="#i-search"/></svg></a><a class="hq-u" data-a="out" href="#login" aria-label="تسجيل الدخول"><svg class="ic"><use href="#i-user"/></svg></a><a class="hq-u" data-a="in" href="#account" aria-label="حسابي"><svg class="ic"><use href="#i-user"/></svg></a><a data-a="in" href="#favorites" aria-label="المفضلة"><svg class="ic"><use href="#i-heart"/></svg></a><a data-a="in" href="#alerts" id="bell" aria-label="التنبيهات" aria-haspopup="true" aria-expanded="false" aria-controls="nfp"><svg class="ic"><use href="#i-bell"/></svg><b id="bc" hidden>0</b></a></div>
-  <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav" aria-label="القائمة"><svg class="ic"><use href="#i-menu"/></svg></button>
-</div></header>
+  </header>
 
-<div class="home"><section class="hero" id="home">
-  <div class="hsl-bgs" aria-hidden="true">
-    <div class="hsl-bg hsl-i y on"><picture><source media="(max-width:700px)" srcset="assets/bahr-hero-yacht-m.jpg"><img src="assets/bahr-hero-yacht.jpg" alt="" decoding="async" fetchpriority="high"></picture></div>
-    <div class="hsl-bg hsl-i j"><picture><source media="(max-width:700px)" srcset="assets/bahr-hero-jetski-m.jpg"><img src="assets/bahr-hero-jetski.jpg" alt="" decoding="async" loading="lazy" decoding="async"></picture></div>
-    <div class="hsl-bg hsl-i e"><picture><source media="(max-width:700px)" srcset="assets/bahr-hero-engine-m.jpg"><img src="assets/bahr-hero-engine.jpg" alt="" decoding="async" loading="lazy" decoding="async"></picture></div>
-  </div>
-  <div class="wrap hero-in"><div class="hero-t">
-    <h1 class="sr-only">بحر | BAHR — كل ما تحتاجه لعالم البحر في مكان واحد</h1>
-    <div class="hsl-txt" id="hslTxt" aria-live="polite">
-      <div class="hsl-c hsl-i on"><p class="hsl-t" role="heading" aria-level="2">كل ما تحتاجه لعالم البحر <span class="gd">في مكان واحد</span></p><p class="lead">قوارب ويخوت وجت سكي ومحركات وقطع غيار وخدمات، تصفّحها وقارنها وتواصل مع أصحابها.</p><div class="hsl-b"><a class="btn btn-p" href="#market" data-mt="boat">تصفّح القوارب</a><a class="btn btn-o" href="#services">الورش والخدمات</a></div></div>
-      <div class="hsl-c hsl-i"><p class="hsl-t" role="heading" aria-level="2">سرعة وحماس <span class="gd">على سطح الماء</span></p><p class="lead">اكتشف إعلانات الجت سكي المنشورة، وجرّب المجسم ثلاثي الأبعاد لتعرف أجزاءه وخياراته.</p><div class="hsl-b"><a class="btn btn-p" href="#market" data-mt="jetski">تصفّح الجت سكي</a><a class="btn btn-o" href="#show3d" data-go="#show3d">جرّب المجسم 3D</a></div></div>
-      <div class="hsl-c hsl-i"><p class="hsl-t" role="heading" aria-level="2">محركات وقطع غيار <span class="gd">وخدمات بحرية</span></p><p class="lead">ابحث عن محرك أو قطعة، أو اطلب القطعة التي تحتاجها، أو ابحث عن ورشة وفني.</p><div class="hsl-b"><a class="btn btn-p" href="#parts">BAHR PARTS</a><a class="btn btn-o" href="#market" data-mt="engine">تصفّح المحركات</a></div></div>
+  <div class="home">
+    <section class="hero" id="home">
+      <div class="hsl-bgs" aria-hidden="true">
+        <div class="hsl-bg hsl-i y on">
+          <picture>
+            <source media="(max-width:700px)" srcset="assets/bahr-hero-yacht-m.jpg"><img
+              src="assets/bahr-hero-yacht.jpg" alt="" decoding="async" fetchpriority="high">
+          </picture>
+        </div>
+        <div class="hsl-bg hsl-i j">
+          <picture>
+            <source media="(max-width:700px)" srcset="assets/bahr-hero-jetski-m.jpg"><img
+              src="assets/bahr-hero-jetski.jpg" alt="" decoding="async" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="hsl-bg hsl-i e">
+          <picture>
+            <source media="(max-width:700px)" srcset="assets/bahr-hero-engine-m.jpg"><img
+              src="assets/bahr-hero-engine.jpg" alt="" decoding="async" loading="lazy" decoding="async">
+          </picture>
+        </div>
+      </div>
+      <div class="wrap hero-in">
+        <div class="hero-t">
+          <h1 class="sr-only">بحر | BAHR — كل ما تحتاجه لعالم البحر في مكان واحد</h1>
+          <div class="hsl-txt" id="hslTxt" aria-live="polite">
+            <div class="hsl-c hsl-i on">
+              <p class="hsl-t" role="heading" aria-level="2">كل ما تحتاجه لعالم البحر <span class="gd">في مكان
+                  واحد</span></p>
+              <p class="lead">قوارب ويخوت وجت سكي ومحركات وقطع غيار وخدمات، تصفّحها وقارنها وتواصل مع أصحابها.</p>
+              <div class="hsl-b"><a class="btn btn-p" href="#market" data-mt="boat">تصفّح القوارب</a><a
+                  class="btn btn-o" href="#services">الورش والخدمات</a></div>
+            </div>
+            <div class="hsl-c hsl-i">
+              <p class="hsl-t" role="heading" aria-level="2">سرعة وحماس <span class="gd">على سطح الماء</span></p>
+              <p class="lead">اكتشف إعلانات الجت سكي المنشورة، وجرّب المجسم ثلاثي الأبعاد لتعرف أجزاءه وخياراته.</p>
+              <div class="hsl-b"><a class="btn btn-p" href="#market" data-mt="jetski">تصفّح الجت سكي</a><a
+                  class="btn btn-o" href="#show3d" data-go="#show3d">جرّب المجسم 3D</a></div>
+            </div>
+            <div class="hsl-c hsl-i">
+              <p class="hsl-t" role="heading" aria-level="2">محركات وقطع غيار <span class="gd">وخدمات بحرية</span></p>
+              <p class="lead">ابحث عن محرك أو قطعة، أو اطلب القطعة التي تحتاجها، أو ابحث عن ورشة وفني.</p>
+              <div class="hsl-b"><a class="btn btn-p" href="#parts">BAHR PARTS</a><a class="btn btn-o" href="#market"
+                  data-mt="engine">تصفّح المحركات</a></div>
+            </div>
+          </div>
+          <form class="search" id="search" role="search"><button type="submit" aria-label="بحث"><svg class="ic">
+                <use href="#i-search" />
+              </svg><span>بحث</span></button><input type="search" aria-label="بحث"
+              placeholder="شنو تدور عليه؟ قارب، جت سكي، محرك أو قطعة" enterkeyhint="search" autocomplete="off"></form>
+          <ul class="hero-chips" aria-label="وصول سريع">
+            <li><a href="#market" data-mt="boat">القوارب</a></li>
+            <li><a href="#market" data-mt="jetski">الجت سكي</a></li>
+            <li><a href="#market" data-mt="engine">المحركات</a></li>
+            <li><a href="#parts">قطع الغيار</a></li>
+            <li><a href="#services">الورش والخدمات</a></li>
+          </ul>
+          <div class="trust"><span><svg class="ic">
+                <use href="#i-shield" />
+              </svg>التصفح مجاني ودون حساب</span><span><svg class="ic">
+                <use href="#i-search" />
+              </svg>بحث في الإعلانات المنشورة</span></div>
+        </div>
+      </div>
+      <div class="hsl-ctl"><button type="button" class="hsl-a" id="hslPrev" aria-label="الشريحة السابقة">›</button>
+        <div class="hsl-dots" id="hslDots" role="tablist" aria-label="شرائح الواجهة"></div><button type="button"
+          class="hsl-a" id="hslNext" aria-label="الشريحة التالية">‹</button>
+      </div>
+    </section>
+
+    <div class="bgm bl bg-cats">
+      <div class="wrap sec2">
+        <div class="sec-h">
+          <div>
+            <h2>تصفّح حسب التصنيف</h2>
+          </div><a class="all2" href="#market">كل الإعلانات ←</a>
+        </div>
+        <div class="hz" id="cats"></div>
+      </div>
     </div>
-    <form class="search" id="search" role="search"><button type="submit" aria-label="بحث"><svg class="ic"><use href="#i-search"/></svg><span>بحث</span></button><input type="search" aria-label="بحث" placeholder="شنو تدور عليه؟ قارب، جت سكي، محرك أو قطعة" enterkeyhint="search" autocomplete="off"></form>
-    <ul class="hero-chips" aria-label="وصول سريع"><li><a href="#market" data-mt="boat">القوارب</a></li><li><a href="#market" data-mt="jetski">الجت سكي</a></li><li><a href="#market" data-mt="engine">المحركات</a></li><li><a href="#parts">قطع الغيار</a></li><li><a href="#services">الورش والخدمات</a></li></ul>
-    <div class="trust"><span><svg class="ic"><use href="#i-shield"/></svg>التصفح مجاني ودون حساب</span><span><svg class="ic"><use href="#i-search"/></svg>بحث في الإعلانات المنشورة</span></div>
-  </div></div>
-  <div class="hsl-ctl"><button type="button" class="hsl-a" id="hslPrev" aria-label="الشريحة السابقة">›</button><div class="hsl-dots" id="hslDots" role="tablist" aria-label="شرائح الواجهة"></div><button type="button" class="hsl-a" id="hslNext" aria-label="الشريحة التالية">‹</button></div>
-</section>
+    <span id="categories"></span>
 
-<div class="bgm bl bg-cats"><div class="wrap sec2"><div class="sec-h"><div><h2>تصفّح حسب التصنيف</h2></div><a class="all2" href="#market">كل الإعلانات ←</a></div><div class="hz" id="cats"></div></div></div>
-<span id="categories"></span>
+    <section class="ads bgm bw" id="market">
+      <div class="wrap">
+        <div class="ads-h">
+          <div>
+            <h2>أحدث الإعلانات</h2>
+            <p>الإعلانات المنشورة حالياً على المنصة</p>
+          </div>
+          <div class="ads-l"><a class="all" href="#market">عرض الكل ←</a><a class="all" href="#newlisting">+ أضف
+              إعلانك</a></div>
+        </div>
+        <div class="hz" id="ads">
+          <div class="hz-sk" role="status" aria-label="جارٍ التحميل"><i></i><i></i><i></i><i></i></div>
+        </div>
+      </div>
+    </section>
 
-<section class="ads bgm bw" id="market"><div class="wrap">
-  <div class="ads-h"><div><h2>أحدث الإعلانات</h2><p>الإعلانات المنشورة حالياً على المنصة</p></div><div class="ads-l"><a class="all" href="#market">عرض الكل ←</a><a class="all" href="#newlisting">+ أضف إعلانك</a></div></div>
-  <div class="hz" id="ads"><div class="hz-sk" role="status" aria-label="جارٍ التحميل"><i></i><i></i><i></i><i></i></div></div>
-</div></section>
+    <section class="sec2 w" id="hm-boat">
+      <div class="wrap">
+        <div class="sec-h">
+          <div>
+            <h2>القوارب</h2>
+            <p>أحدث إعلانات القوارب المنشورة.</p>
+          </div><a class="all2" href="#market" data-mt="boat">عرض الكل ←</a>
+        </div>
+        <div class="hz" id="hmboat">
+          <div class="hz-sk" role="status" aria-label="جارٍ التحميل"><i></i><i></i><i></i><i></i></div>
+        </div>
+      </div>
+    </section>
+    <section class="sec2 l" id="hm-jet">
+      <div class="wrap">
+        <div class="sec-h">
+          <div>
+            <h2>الجت سكي</h2>
+            <p>أحدث إعلانات الجت سكي المنشورة.</p>
+          </div><a class="all2" href="#market" data-mt="jetski">عرض الكل ←</a>
+        </div>
+        <div class="hz" id="hmjet">
+          <div class="hz-sk" role="status" aria-label="جارٍ التحميل"><i></i><i></i><i></i><i></i></div>
+        </div>
+      </div>
+    </section>
+    <section class="sec2 w" id="hm-eng">
+      <div class="wrap">
+        <div class="sec-h">
+          <div>
+            <h2>المحركات</h2>
+            <p>أحدث إعلانات المحركات المنشورة.</p>
+          </div><a class="all2" href="#market" data-mt="engine">عرض الكل ←</a>
+        </div>
+        <div class="hz" id="hmeng">
+          <div class="hz-sk" role="status" aria-label="جارٍ التحميل"><i></i><i></i><i></i><i></i></div>
+        </div>
+      </div>
+    </section>
+    <section class="pe" id="hm-parts">
+      <div class="wrap">
+        <div>
+          <h2><em>BAHR</em> PARTS — قطع الغيار البحرية</h2>
+          <p>ابحث عن القطعة حسب معدتك ورقم القطعة، أو أرسل طلباً إذا لم تجدها.</p>
+          <form class="search ps" id="partsSearch" role="search"><button type="submit" aria-label="بحث عن قطعة"><svg
+                class="ic">
+                <use href="#i-search" />
+              </svg></button><input type="search" placeholder="اسم القطعة أو رقمها" aria-label="اسم القطعة أو رقمها">
+          </form><a class="btn btn-p" href="#parts">كتالوج القطع حسب المعدة</a><a class="btn btn-o"
+            href="#requestpart">اطلب قطعة</a>
+        </div>
+        <div class="pe-c"><b>الكتالوج:</b> <span id="hmp">جارٍ التحقق من الكتالوج…</span><br>التوافق مع معدتك يحتاج
+          دائماً إلى تأكيد قبل الشراء.</div>
+      </div>
+    </section>
+    <section class="sec2 l" id="hm-biz">
+      <div class="wrap">
+        <div class="sec-h">
+          <div>
+            <h2>المتاجر والموردون</h2>
+            <p>أنشطة تجارية منشورة على بحر.</p>
+          </div><a class="all2" href="#stores">عرض الكل ←</a>
+        </div>
+        <div class="hz" id="hmb">
+          <div class="hz-sk" role="status" aria-label="جارٍ التحميل"><i></i><i></i><i></i><i></i></div>
+        </div>
+      </div>
+    </section>
 
-<section class="sec2 w" id="hm-boat"><div class="wrap"><div class="sec-h"><div><h2>القوارب</h2><p>أحدث إعلانات القوارب المنشورة.</p></div><a class="all2" href="#market" data-mt="boat">عرض الكل ←</a></div><div class="hz" id="hmboat"><div class="hz-sk" role="status" aria-label="جارٍ التحميل"><i></i><i></i><i></i><i></i></div></div></div></section>
-<section class="sec2 l" id="hm-jet"><div class="wrap"><div class="sec-h"><div><h2>الجت سكي</h2><p>أحدث إعلانات الجت سكي المنشورة.</p></div><a class="all2" href="#market" data-mt="jetski">عرض الكل ←</a></div><div class="hz" id="hmjet"><div class="hz-sk" role="status" aria-label="جارٍ التحميل"><i></i><i></i><i></i><i></i></div></div></div></section>
-<section class="sec2 w" id="hm-eng"><div class="wrap"><div class="sec-h"><div><h2>المحركات</h2><p>أحدث إعلانات المحركات المنشورة.</p></div><a class="all2" href="#market" data-mt="engine">عرض الكل ←</a></div><div class="hz" id="hmeng"><div class="hz-sk" role="status" aria-label="جارٍ التحميل"><i></i><i></i><i></i><i></i></div></div></div></section>
-<section class="pe" id="hm-parts"><div class="wrap">
-  <div><h2><em>BAHR</em> PARTS — قطع الغيار البحرية</h2><p>ابحث عن القطعة حسب معدتك ورقم القطعة، أو أرسل طلباً إذا لم تجدها.</p>
-    <form class="search ps" id="partsSearch" role="search"><button type="submit" aria-label="بحث عن قطعة"><svg class="ic"><use href="#i-search"/></svg></button><input type="search" placeholder="اسم القطعة أو رقمها" aria-label="اسم القطعة أو رقمها"></form><a class="btn btn-p" href="#parts">كتالوج القطع حسب المعدة</a><a class="btn btn-o" href="#requestpart">اطلب قطعة</a></div>
-  <div class="pe-c"><b>الكتالوج:</b> <span id="hmp">جارٍ التحقق من الكتالوج…</span><br>التوافق مع معدتك يحتاج دائماً إلى تأكيد قبل الشراء.</div>
-</div></section>
-<section class="sec2 l" id="hm-biz"><div class="wrap">
-  <div class="sec-h"><div><h2>المتاجر والموردون</h2><p>أنشطة تجارية منشورة على بحر.</p></div><a class="all2" href="#stores">عرض الكل ←</a></div>
-  <div class="hz" id="hmb"><div class="hz-sk" role="status" aria-label="جارٍ التحميل"><i></i><i></i><i></i><i></i></div></div></div></section>
-
-<section class="sec2 w" id="hm-srv"><div class="wrap">
-  <div class="sec-h"><div><h2>الورش والفنيون والخدمات</h2><p>ورش وفنيون ومقدمو خدمات بحرية.</p></div><a class="all2" href="#services">عرض الكل ←</a></div>
-  <div class="hz" id="hms"><div class="hz-sk" role="status" aria-label="جارٍ التحميل"><i></i><i></i><i></i><i></i></div></div></div></section>
+    <section class="sec2 w" id="hm-srv">
+      <div class="wrap">
+        <div class="sec-h">
+          <div>
+            <h2>الورش والفنيون والخدمات</h2>
+            <p>ورش وفنيون ومقدمو خدمات بحرية.</p>
+          </div><a class="all2" href="#services">عرض الكل ←</a>
+        </div>
+        <div class="hz" id="hms">
+          <div class="hz-sk" role="status" aria-label="جارٍ التحميل"><i></i><i></i><i></i><i></i></div>
+        </div>
+      </div>
+    </section>
 
 
-<section class="show bgm bw" id="show3d"><div class="wrap">
-  <h2>جرّب جت سكي بنفسك بثلاثي الأبعاد</h2><p class="shs">مرّر للأسفل بالماوس أو بإصبعك لتستكشف كل جزء من الجت سكي بالترتيب، وغيّر اللون والخيارات وشاهد السعر التجريبي يتغيّر.</p>
-  <div class="shg"><div class="stage"><canvas id="j3" aria-label="مجسم ثلاثي الأبعاد لجت سكي"></canvas><div id="j3h"></div><p class="j3m" id="j3m">جارٍ تحميل المجسم…</p><p class="j3n">مرّر للأسفل للاستكشاف · اسحب للتدوير</p></div>
-  <aside class="shp" id="j3p"></aside></div>
-  <div class="sdp" id="j3sp" aria-hidden="true"></div><p class="j3d">المجسم توضيحي وليس نسخة رسمية من ياماها، والأسعار والمواصفات تجريبية.</p>
-</div></section>
-<!-- ====== مجسمات Sketchfab ثلاثية الأبعاد: لإضافة مجسم جديد انسخ عنصر skc كاملاً داخل skg وبدّل المعرّف في src والعنوان واسم الناشر والروابط. حقوق الناشر يجب أن تبقى ظاهرة. ====== -->
-<section class="sk" id="sk3d"><div class="wrap">
-  <h2>شاهد المجسمات بثلاثي الأبعاد</h2><p class="sks">حرّك المجسم بإصبعك أو بالماوس لتدويره وتكبيره ومشاهدته من كل الزوايا.</p>
-  <div class="skg">
-    <div class="skc"><iframe title="jetski Yamaha Superjet 700" loading="lazy" allowfullscreen allow="autoplay; fullscreen; xr-spatial-tracking" src="https://sketchfab.com/models/299480aa65cd49d397471c28fade6bb8/embed?preload=1"></iframe>
-    <p><a href="https://sketchfab.com/3d-models/jetski-yamaha-superjet-700-299480aa65cd49d397471c28fade6bb8" target="_blank" rel="nofollow noopener">jetski Yamaha Superjet 700</a> by <a href="https://sketchfab.com/martinflash" target="_blank" rel="nofollow noopener">martinflash</a> on <a href="https://sketchfab.com" target="_blank" rel="nofollow noopener">Sketchfab</a></p></div>
-    <div class="skc"><iframe title="Jetski" loading="lazy" allowfullscreen allow="autoplay; fullscreen; xr-spatial-tracking" src="https://sketchfab.com/models/446f5b7ba9f74bfb83ad696c494e899e/embed?autospin=1&amp;ui_theme=dark"></iframe>
-    <p><a href="https://sketchfab.com/3d-models/jetski-446f5b7ba9f74bfb83ad696c494e899e" target="_blank" rel="nofollow noopener">Jetski</a> by <a href="https://sketchfab.com/AKStudio3D" target="_blank" rel="nofollow noopener">Adrian Kulawik</a> on <a href="https://sketchfab.com" target="_blank" rel="nofollow noopener">Sketchfab</a></p></div>
-    <div class="skc"><iframe title="Kawasaki 310XUltra Jet Ski" loading="lazy" allowfullscreen allow="autoplay; fullscreen; xr-spatial-tracking" src="https://sketchfab.com/models/37a2348f02da472d98310fd5621307c6/embed?autospin=1&amp;autostart=1&amp;ui_theme=dark"></iframe>
-    <p><a href="https://sketchfab.com/3d-models/kawasaki-310xultra-jet-ski-37a2348f02da472d98310fd5621307c6" target="_blank" rel="nofollow noopener">Kawasaki 310XUltra Jet Ski</a> by <a href="https://sketchfab.com/XOIAL" target="_blank" rel="nofollow noopener">XOIAL</a> on <a href="https://sketchfab.com" target="_blank" rel="nofollow noopener">Sketchfab</a></p></div>
+    <section class="show bgm bw" id="show3d">
+      <div class="wrap">
+        <h2>جرّب جت سكي بنفسك بثلاثي الأبعاد</h2>
+        <p class="shs">مرّر للأسفل بالماوس أو بإصبعك لتستكشف كل جزء من الجت سكي بالترتيب، وغيّر اللون والخيارات وشاهد
+          السعر التجريبي يتغيّر.</p>
+        <div class="shg">
+          <div class="stage"><canvas id="j3" aria-label="مجسم ثلاثي الأبعاد لجت سكي"></canvas>
+            <div id="j3h"></div>
+            <p class="j3m" id="j3m">جارٍ تحميل المجسم…</p>
+            <p class="j3n">مرّر للأسفل للاستكشاف · اسحب للتدوير</p>
+          </div>
+          <aside class="shp" id="j3p"></aside>
+        </div>
+        <div class="sdp" id="j3sp" aria-hidden="true"></div>
+        <p class="j3d">المجسم توضيحي وليس نسخة رسمية من ياماها، والأسعار والمواصفات تجريبية.</p>
+      </div>
+    </section>
+    <!-- ====== مجسمات Sketchfab ثلاثية الأبعاد: لإضافة مجسم جديد انسخ عنصر skc كاملاً داخل skg وبدّل المعرّف في src والعنوان واسم الناشر والروابط. حقوق الناشر يجب أن تبقى ظاهرة. ====== -->
+    <section class="sk" id="sk3d">
+      <div class="wrap">
+        <h2>شاهد المجسمات بثلاثي الأبعاد</h2>
+        <p class="sks">حرّك المجسم بإصبعك أو بالماوس لتدويره وتكبيره ومشاهدته من كل الزوايا.</p>
+        <div class="skg">
+          <div class="skc"><iframe title="jetski Yamaha Superjet 700" loading="lazy" allowfullscreen
+              allow="autoplay; fullscreen; xr-spatial-tracking"
+              src="https://sketchfab.com/models/299480aa65cd49d397471c28fade6bb8/embed?preload=1"></iframe>
+            <p><a href="https://sketchfab.com/3d-models/jetski-yamaha-superjet-700-299480aa65cd49d397471c28fade6bb8"
+                target="_blank" rel="nofollow noopener">jetski Yamaha Superjet 700</a> by <a
+                href="https://sketchfab.com/martinflash" target="_blank" rel="nofollow noopener">martinflash</a> on <a
+                href="https://sketchfab.com" target="_blank" rel="nofollow noopener">Sketchfab</a></p>
+          </div>
+          <div class="skc"><iframe title="Jetski" loading="lazy" allowfullscreen
+              allow="autoplay; fullscreen; xr-spatial-tracking"
+              src="https://sketchfab.com/models/446f5b7ba9f74bfb83ad696c494e899e/embed?autospin=1&amp;ui_theme=dark"></iframe>
+            <p><a href="https://sketchfab.com/3d-models/jetski-446f5b7ba9f74bfb83ad696c494e899e" target="_blank"
+                rel="nofollow noopener">Jetski</a> by <a href="https://sketchfab.com/AKStudio3D" target="_blank"
+                rel="nofollow noopener">Adrian Kulawik</a> on <a href="https://sketchfab.com" target="_blank"
+                rel="nofollow noopener">Sketchfab</a></p>
+          </div>
+          <div class="skc"><iframe title="Kawasaki 310XUltra Jet Ski" loading="lazy" allowfullscreen
+              allow="autoplay; fullscreen; xr-spatial-tracking"
+              src="https://sketchfab.com/models/37a2348f02da472d98310fd5621307c6/embed?autospin=1&amp;autostart=1&amp;ui_theme=dark"></iframe>
+            <p><a href="https://sketchfab.com/3d-models/kawasaki-310xultra-jet-ski-37a2348f02da472d98310fd5621307c6"
+                target="_blank" rel="nofollow noopener">Kawasaki 310XUltra Jet Ski</a> by <a
+                href="https://sketchfab.com/XOIAL" target="_blank" rel="nofollow noopener">XOIAL</a> on <a
+                href="https://sketchfab.com" target="_blank" rel="nofollow noopener">Sketchfab</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tech bgm bw" id="tech">
+      <div class="wrap tech-g" style="padding-top:44px">
+        <div class="tech-c">
+          <h2>BAHR TECH مركز</h2>
+          <p style="margin:0;color:#CFDBF0">مركز مخصص للأدوات والبرامج الفنية. الهيكل متاح للاستعراض، والمحتوى الفني لم
+            يُضَف بعد.</p>
+          <ul>
+            <li>قريباً: أدلة وأدوات فنية</li>
+            <li>حالياً: <a href="#help" style="color:#fff;text-decoration:underline">مركز المساعدة والتعليم البحري</a>
+            </li>
+          </ul>
+          <div><a class="btn btn-p" href="#bt">استعرض هيكل المركز الفني</a></div>
+        </div>
+        <div class="feat">
+          <div class="fi"><i><svg class="ic">
+                <use href="#i-plus" />
+              </svg></i>
+            <div><b>نشر إعلانك بسهولة</b><span>سجل حسابك وانشر إعلانك في دقائق</span></div>
+          </div>
+          <div class="fi"><i><svg class="ic">
+                <use href="#i-chat" />
+              </svg></i>
+            <div><b>تواصل مباشر مع البائعين</b><span>محادثات آمنة وسريعة</span></div>
+          </div>
+          <div class="fi"><i><svg class="ic">
+                <use href="#i-wrench" />
+              </svg></i>
+            <div><b>مركز المساعدة</b><span>مقالات تعليمية عامة وإرشادات الاستخدام</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="how bgm bl" id="how">
+      <div class="wrap">
+        <h2>كيف تعمل المنصة؟</h2>
+        <p>خطوات بسيطة يمكنك الوصول لكل ما تحتاجه</p>
+        <ol class="steps">
+          <li><span class="n">1</span><i><svg class="ic">
+                <use href="#i-user" />
+              </svg></i><b>إنشاء حساب</b><span>سجل برقم هاتفك أو بريدك الإلكتروني</span></li>
+          <li><span class="n">2</span><i><svg class="ic">
+                <use href="#i-search" />
+              </svg></i><b>تصفح الإعلانات</b><span>اختر ما يناسبك</span></li>
+          <li><span class="n">3</span><i><svg class="ic">
+                <use href="#i-chat" />
+              </svg></i><b>تواصل مع البائع</b><span>اطلب تفاصيل أكثر</span></li>
+          <li><span class="n">4</span><i><svg class="ic">
+                <use href="#i-hand" />
+              </svg></i><b>أتمم الصفقة</b><span>بأمان وسهولة</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="sec2 l" id="hm-trust">
+      <div class="wrap">
+        <div class="sec-h">
+          <div>
+            <h2>الثقة والسلامة</h2>
+            <p>إرشادات تساعدك على الشراء والتعامل بوعي.</p>
+          </div>
+        </div>
+        <div class="tr23"><a href="#safety"><svg class="ic">
+              <use href="#i-shield" />
+            </svg><b>السلامة والثقة</b><span>كيف تتحقق من البائع والمعدة قبل الدفع.</span></a><a href="#faq"><svg
+              class="ic">
+              <use href="#i-search" />
+            </svg><b>الأسئلة الشائعة</b><span>أجوبة سريعة عن الحسابات والإعلانات.</span></a><a href="#help"><svg
+              class="ic">
+              <use href="#i-wrench" />
+            </svg><b>مركز المساعدة</b><span>مقالات تعليمية عن القوارب والمحركات.</span></a><a href="#contact"><svg
+              class="ic">
+              <use href="#i-chat" />
+            </svg><b>تواصل معنا</b><span>أرسل استفسارك أو بلّغ عن مشكلة.</span></a></div>
+      </div>
+    </section>
+
+    <section class="sec2 w" id="hm-tips">
+      <div class="wrap">
+        <div class="sec-h">
+          <div>
+            <h2>نصائح بحرية</h2>
+            <p>من مركز المساعدة: معلومات تعليمية عامة.</p>
+          </div><a class="all2" href="#help">عرض الكل ←</a>
+        </div>
+        <div class="hz" id="hmtips"></div>
+      </div>
+    </section>
+    <section class="sec2 l" id="hm-why">
+      <div class="wrap">
+        <div class="sec-h">
+          <div>
+            <h2>لماذا بحر؟</h2>
+          </div>
+        </div>
+        <div class="why"><a href="#safety"><svg class="ic">
+              <use href="#i-shield" />
+            </svg><b>بيئة آمنة</b><span>إرشادات للتحقق من البائع والمعدة قبل الدفع.</span></a><a href="#parts"><svg
+              class="ic">
+              <use href="#i-parts" />
+            </svg><b>BAHR PARTS</b><span>كتالوج قطع غيار مع طلب قطعة عند عدم توفرها.</span></a><a href="#services"><svg
+              class="ic">
+              <use href="#i-wrench" />
+            </svg><b>ورش وخدمات</b><span>ورش وفنيون حسب المحافظة والمعدة.</span></a><a href="#market"><svg class="ic">
+              <use href="#i-chat" />
+            </svg><b>تواصل مباشر</b><span>محادثات مع البائعين داخل المنصة.</span></a></div>
+      </div>
+    </section>
+    <section class="sec2 w" id="hm-rev">
+      <div class="wrap">
+        <div class="sec-h">
+          <div>
+            <h2>آراء المستخدمين</h2>
+          </div>
+        </div>
+        <div class="rv">لا توجد آراء منشورة بعد. ستظهر هنا بعد تفعيل نظام التقييمات.</div>
+      </div>
+    </section>
+    <section class="abt" id="hm-about">
+      <div class="wrap abt-g">
+        <div>
+          <h2>من نحن</h2>
+          <p>بحر منصة عربية تجمع المهتمين بالقوارب والجت سكي والمحركات وقطع الغيار والمعدات البحرية والورش والفنيين في
+            مكان واحد. التصفح والبحث متاحان للجميع دون حساب.</p>
+          <div class="abt-b"><a class="btn btn-p" href="#about">تعرّف علينا</a><a class="btn btn-o"
+              href="#howitworks">كيف تعمل المنصة</a></div>
+        </div>
+        <div class="abt-c">
+          <h3>تحتاج مساعدة؟</h3><a href="#help">مركز المساعدة</a><a href="#faq">الأسئلة الشائعة</a><a
+            href="#safety">السلامة والثقة</a><a href="#contact">تواصل معنا</a>
+        </div>
+      </div>
+    </section>
+    <section class="join">
+      <div class="wrap">
+        <h2>انضم إلى مجتمع بحر</h2>
+        <p>كن جزءاً من أكبر منصة بحرية في العراق</p>
+        <button class="btn btn-p" data-go="#signup">إنشاء حساب جديد</button><a class="btn btn-o" href="#market">تصفح
+          المنصة</a>
+      </div>
+    </section>
+
   </div>
-</div></section>
-
-<section class="tech bgm bw" id="tech"><div class="wrap tech-g" style="padding-top:44px">
-  <div class="tech-c"><h2>BAHR TECH مركز</h2><p style="margin:0;color:#CFDBF0">مركز مخصص للأدوات والبرامج الفنية. الهيكل متاح للاستعراض، والمحتوى الفني لم يُضَف بعد.</p>
-    <ul><li>قريباً: أدلة وأدوات فنية</li><li>حالياً: <a href="#help" style="color:#fff;text-decoration:underline">مركز المساعدة والتعليم البحري</a></li></ul>
-    <div><a class="btn btn-p" href="#bt">استعرض هيكل المركز الفني</a></div></div>
-  <div class="feat">
-    <div class="fi"><i><svg class="ic"><use href="#i-plus"/></svg></i><div><b>نشر إعلانك بسهولة</b><span>سجل حسابك وانشر إعلانك في دقائق</span></div></div>
-    <div class="fi"><i><svg class="ic"><use href="#i-chat"/></svg></i><div><b>تواصل مباشر مع البائعين</b><span>محادثات آمنة وسريعة</span></div></div>
-    <div class="fi"><i><svg class="ic"><use href="#i-wrench"/></svg></i><div><b>مركز المساعدة</b><span>مقالات تعليمية عامة وإرشادات الاستخدام</span></div></div>
-  </div>
-</div></section>
-
-<section class="how bgm bl" id="how"><div class="wrap"><h2>كيف تعمل المنصة؟</h2><p>خطوات بسيطة يمكنك الوصول لكل ما تحتاجه</p>
-  <ol class="steps">
-    <li><span class="n">1</span><i><svg class="ic"><use href="#i-user"/></svg></i><b>إنشاء حساب</b><span>سجل برقم هاتفك أو بريدك الإلكتروني</span></li>
-    <li><span class="n">2</span><i><svg class="ic"><use href="#i-search"/></svg></i><b>تصفح الإعلانات</b><span>اختر ما يناسبك</span></li>
-    <li><span class="n">3</span><i><svg class="ic"><use href="#i-chat"/></svg></i><b>تواصل مع البائع</b><span>اطلب تفاصيل أكثر</span></li>
-    <li><span class="n">4</span><i><svg class="ic"><use href="#i-hand"/></svg></i><b>أتمم الصفقة</b><span>بأمان وسهولة</span></li>
-  </ol></div></section>
-
-<section class="sec2 l" id="hm-trust"><div class="wrap">
-  <div class="sec-h"><div><h2>الثقة والسلامة</h2><p>إرشادات تساعدك على الشراء والتعامل بوعي.</p></div></div>
-  <div class="tr23"><a href="#safety"><svg class="ic"><use href="#i-shield"/></svg><b>السلامة والثقة</b><span>كيف تتحقق من البائع والمعدة قبل الدفع.</span></a><a href="#faq"><svg class="ic"><use href="#i-search"/></svg><b>الأسئلة الشائعة</b><span>أجوبة سريعة عن الحسابات والإعلانات.</span></a><a href="#help"><svg class="ic"><use href="#i-wrench"/></svg><b>مركز المساعدة</b><span>مقالات تعليمية عن القوارب والمحركات.</span></a><a href="#contact"><svg class="ic"><use href="#i-chat"/></svg><b>تواصل معنا</b><span>أرسل استفسارك أو بلّغ عن مشكلة.</span></a></div>
-</div></section>
-
-<section class="sec2 w" id="hm-tips"><div class="wrap"><div class="sec-h"><div><h2>نصائح بحرية</h2><p>من مركز المساعدة: معلومات تعليمية عامة.</p></div><a class="all2" href="#help">عرض الكل ←</a></div><div class="hz" id="hmtips"></div></div></section>
-<section class="sec2 l" id="hm-why"><div class="wrap"><div class="sec-h"><div><h2>لماذا بحر؟</h2></div></div><div class="why"><a href="#safety"><svg class="ic"><use href="#i-shield"/></svg><b>بيئة آمنة</b><span>إرشادات للتحقق من البائع والمعدة قبل الدفع.</span></a><a href="#parts"><svg class="ic"><use href="#i-parts"/></svg><b>BAHR PARTS</b><span>كتالوج قطع غيار مع طلب قطعة عند عدم توفرها.</span></a><a href="#services"><svg class="ic"><use href="#i-wrench"/></svg><b>ورش وخدمات</b><span>ورش وفنيون حسب المحافظة والمعدة.</span></a><a href="#market"><svg class="ic"><use href="#i-chat"/></svg><b>تواصل مباشر</b><span>محادثات مع البائعين داخل المنصة.</span></a></div></div></section>
-<section class="sec2 w" id="hm-rev"><div class="wrap"><div class="sec-h"><div><h2>آراء المستخدمين</h2></div></div><div class="rv">لا توجد آراء منشورة بعد. ستظهر هنا بعد تفعيل نظام التقييمات.</div></div></section>
-<section class="abt" id="hm-about"><div class="wrap abt-g"><div><h2>من نحن</h2><p>بحر منصة عربية تجمع المهتمين بالقوارب والجت سكي والمحركات وقطع الغيار والمعدات البحرية والورش والفنيين في مكان واحد. التصفح والبحث متاحان للجميع دون حساب.</p><div class="abt-b"><a class="btn btn-p" href="#about">تعرّف علينا</a><a class="btn btn-o" href="#howitworks">كيف تعمل المنصة</a></div></div><div class="abt-c"><h3>تحتاج مساعدة؟</h3><a href="#help">مركز المساعدة</a><a href="#faq">الأسئلة الشائعة</a><a href="#safety">السلامة والثقة</a><a href="#contact">تواصل معنا</a></div></div></section>
-<section class="join"><div class="wrap"><h2>انضم إلى مجتمع بحر</h2><p>كن جزءاً من أكبر منصة بحرية في العراق</p>
-  <button class="btn btn-p" data-go="#signup">إنشاء حساب جديد</button><a class="btn btn-o" href="#market">تصفح المنصة</a></div></section>
-
-</div>
-<main id="mk" class="bgm bl"><div class="wrap">
-<h1>السوق البحري</h1><p class="mk-s">تصفّح القوارب والجت سكي والمحركات وقطع الغيار والمعدات البحرية.</p>
-<div class="demo" id="dm" style="display:none"><b>بيانات تجريبية:</b> تعذّر تحميل الإعلانات من قاعدة البيانات (أو لم تُجهَّز بعد)، لذلك تُعرض أمثلة للتصميم فقط. الإعلانات والأسعار والبائعون المعروضون هنا للتصميم فقط، وليست إعلانات حقيقية. الصور من Pexels وهي توضيحية.</div>
-<div class="tabs" id="tabs"></div>
-<form class="fb" id="fb" onsubmit="return false">
-<label class="wide">بحث<input id="q" type="search" maxlength="80" placeholder="الاسم أو الشركة أو الموديل أو السنة أو رقم القطعة/التسلسلي"></label>
-<label>المحافظة<select id="pv"><option value="">كل المحافظات</option></select></label>
-<label>الحالة<select id="cd"><option value="">الكل</option><option>جديد</option><option>مستعمل</option></select></label>
-<label>الشركة المصنعة<select id="mf"><option value="">الكل</option></select></label>
-<label>الموديل<input id="md" placeholder="مثال: VX"></label>
-<div class="pr" id="yrw"><label>السنة من<input id="y1" type="number" min="1950" max="2100" inputmode="numeric"></label><label>إلى<input id="y2" type="number" min="1950" max="2100" inputmode="numeric"></label></div>
-<label id="hpw" style="display:none">القدرة (حصان) من<input id="hp" type="number" min="0" inputmode="numeric"></label>
-<div class="pr"><label>السعر من<input id="p1" type="number" min="0" inputmode="numeric"></label><label>إلى<input id="p2" type="number" min="0" inputmode="numeric"></label></div>
-<label>العملة (لنطاق السعر)<select id="cu"><option value="USD">دولار ($)</option><option value="IQD">دينار (د.ع)</option></select></label>
-<label>الترتيب<select id="so"><option value="">الأحدث</option><option value="a">السعر: الأقل</option><option value="d">السعر: الأعلى</option></select></label>
-<button class="rs" id="sv-s" type="button">حفظ هذا البحث</button>
-<button class="rs" id="rs" type="button">مسح التصفية</button>
-</form>
-<p class="cnt" id="cnt2" role="status" aria-live="polite"></p>
-<div class="mg" id="mg"></div>
-</div></main>
-<main id="sv" class="bgm bl"><div class="wrap">
-<h1>الخدمات البحرية والورش والفنيون</h1><p class="sv-s mk-s">ابحث عن ورشة أو فني لصيانة الجت سكي والمحركات والقوارب وتشخيص الأعطال.</p>
-<div class="demo" id="ds" style="display:none"><b>بيانات تجريبية:</b> تعذّر تحميل الخدمات من قاعدة البيانات (أو لم تُجهَّز بعد)، لذلك تُعرض أمثلة للتصميم فقط. الورش والفنيون المعروضون هنا للتصميم فقط، وليسوا مقدمي خدمة حقيقيين. لا توجد أسماء أو أرقام هواتف أو تقييمات حقيقية. الصور من Pexels وهي توضيحية.</div>
-<div class="tabs" id="stabs"></div>
-<form class="fb" id="sfb" onsubmit="return false">
-<label class="wide">بحث<input id="sq" type="search" placeholder="اسم الورشة أو الفني أو الخدمة"></label>
-<label>المحافظة<select id="spv"><option value="">كل المحافظات</option></select></label>
-<label>المنطقة<select id="sar"><option value="">كل المناطق</option></select></label>
-<label>نوع المحرك أو المعدة<select id="seq"><option value="">الكل</option></select></label>
-<button class="rs" id="srs" type="button">مسح التصفية</button>
-</form>
-<p class="cnt" id="scnt" role="status" aria-live="polite"></p>
-<div class="mg" id="smg"></div>
-</div></main>
-<div id="sd" role="dialog" aria-modal="true" aria-label="تفاصيل مقدم الخدمة"><div class="dw" id="sdw"></div></div>
-<main id="au" class="bgm bl"><div class="wrap"><div class="au-c">
-<img class="lg" src="logo-blue.png" alt="بحر">
-<section class="ap" id="ap-denied"></section>
-<section class="ap" id="ap-load"><p class="sub">جارٍ التحقق من حالة الحساب…</p></section>
-<section class="ap" id="ap-login"><h1>تسجيل الدخول</h1><p class="sub">أهلاً بك في بحر</p><div class="msg" role="alert"></div>
-<form id="f-login" novalidate><label>رقم الهاتف<input id="l-e" type="tel" inputmode="tel" autocomplete="username" dir="ltr" placeholder="07701234567" required><span class="fe" data-e="l-e"></span></label><label>كلمة المرور<div class="pw"><input id="l-p" type="password" autocomplete="current-password" required><button type="button" class="eye" aria-label="إظهار كلمة المرور"></button></div><span class="fe" data-e="l-p"></span></label><label class="chk"><input type="checkbox" id="l-r" checked><span>تذكرني</span></label><button class="btn" type="submit">دخول</button></form>
-<div class="lnk"><a href="#forgot">نسيت كلمة المرور؟</a><a href="#signup">إنشاء حساب جديد</a></div></section>
-<section class="ap" id="ap-signup"><h1>إنشاء حساب جديد</h1><p class="sub">سجّل لتنضم إلى مجتمع بحر</p><div class="msg" role="alert"></div>
-<form id="f-signup" novalidate><label>الاسم الكامل<input id="s-n" autocomplete="name" required><span class="fe" data-e="s-n"></span></label><label>رقم الهاتف<input id="s-ph" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" placeholder="07701234567" required><span class="fe" data-e="s-ph"></span></label><label>البريد الإلكتروني (اختياري)<input id="s-e" type="email" inputmode="email" autocomplete="email" dir="ltr"><span class="fe" data-e="s-e"></span></label><label>كلمة المرور (8 أحرف على الأقل)<div class="pw"><input id="s-p" type="password" autocomplete="new-password" required><button type="button" class="eye" aria-label="إظهار كلمة المرور"></button></div><span class="fe" data-e="s-p"></span></label><label>تأكيد كلمة المرور<div class="pw"><input id="s-p2" type="password" autocomplete="new-password" required><button type="button" class="eye" aria-label="إظهار كلمة المرور"></button></div><span class="fe" data-e="s-p2"></span></label><label class="chk"><input type="checkbox" id="s-t"><span>أوافق على <a href="#terms" target="_blank">الشروط والأحكام</a> و<a href="#privacy" target="_blank">سياسة الخصوصية</a></span></label><span class="fe" data-e="s-t"></span><button class="btn" type="submit">إنشاء الحساب</button></form>
-<div class="lnk"><span>لديك حساب؟</span><a href="#login">تسجيل الدخول</a></div></section>
-<section class="ap" id="ap-forgot"><h1>استعادة كلمة المرور</h1><p class="sub">أدخل بريدك الإلكتروني المسجّل وسنرسل لك رابط الاستعادة. إن سجّلت برقم الهاتف فقط فلا تتوفر استعادة تلقائية حالياً، تواصل معنا من صفحة «تواصل معنا».</p><div class="msg" role="alert"></div>
-<form id="f-forgot" novalidate><label>البريد الإلكتروني<input id="f-e" type="email" inputmode="email" autocomplete="email" dir="ltr" required><span class="fe" data-e="f-e"></span></label><button class="btn" type="submit">إرسال الرابط</button></form>
-<div class="lnk"><a href="#login">العودة لتسجيل الدخول</a></div></section>
-<section class="ap" id="ap-reset"><h1>كلمة مرور جديدة</h1><p class="sub">اختر كلمة مرور جديدة لحسابك</p><div class="msg" role="alert"></div>
-<form id="f-reset" novalidate><label>كلمة المرور الجديدة<div class="pw"><input id="r-p" type="password" autocomplete="new-password" required><button type="button" class="eye" aria-label="إظهار كلمة المرور"></button></div><span class="fe" data-e="r-p"></span></label><label>تأكيد كلمة المرور<div class="pw"><input id="r-p2" type="password" autocomplete="new-password" required><button type="button" class="eye" aria-label="إظهار كلمة المرور"></button></div><span class="fe" data-e="r-p2"></span></label><button class="btn" type="submit">حفظ كلمة المرور</button></form></section>
-<section class="ap" id="ap-account"><h1>حسابي</h1><div class="msg" role="alert"></div><div id="acc"></div>
-<form id="f-rec" novalidate hidden><label>بريد للاستعادة (اختياري)<input id="rc-e" type="email" inputmode="email" autocomplete="email" dir="ltr"><span class="fe" data-e="rc-e"></span></label><p class="hint" style="margin:0 0 8px;font-size:13px">سنرسل رابط تأكيد إلى هذا البريد. بعد تأكيده تستطيع استعادة كلمة المرور به.</p><button class="btn" type="submit">إضافة البريد</button></form>
-<p style="margin:16px 0 0"><button class="btn" data-act="logout" type="button">تسجيل الخروج</button></p>
-<div class="lnk"><a href="#newlisting">إضافة إعلان</a><a href="#mylistings">إعلاناتي</a><a href="#requests">أطلب اللي تحتاجه</a><a href="#parts">قطع الغيار BAHR PARTS</a><a href="#inbox">BAHR CONNECT — الرسائل</a><a href="#business">BAHR BUSINESS — حساب النشاط التجاري</a><a href="#profile">ملفي الشخصي</a><a href="#favorites">المفضلة</a><a href="#searches">بحوثي المحفوظة</a><a href="#alerts">التنبيهات</a><a href="#market">السوق البحري</a><a href="#services">الخدمات والورش</a></div></section>
-<section class="ap b17" id="ap-b17"><div id="b17c"></div></section>
-<section class="ap b17" id="ap-b55"><div id="b55c"></div></section>
-<section class="ap b17" id="ap-b56"><div id="b56c"></div></section>
-<section class="ap b17" id="ap-b57"><div id="b57c"></div></section>
-<section class="ap b17" id="ap-b58"><div id="b58c"></div></section>
-<section class="ap b17" id="ap-b59"><div id="b59c"></div></section>
-<section class="ap b17" id="ap-b59p"><div id="b59p"></div></section>
-<section class="ap b17" id="ap-b60"><div id="b60c"></div></section>
-<section class="ap b17" id="ap-b15"><div id="b15c"></div></section>
-<section class="ap b17" id="ap-b49"><div id="b49c"></div></section>
-<section class="ap b17" id="ap-b62"><div id="b62c"></div></section>
-<section class="ap b17" id="ap-rqh" style="max-width:980px"><div id="rqhc">
-<h1>أطلب اللي تحتاجه</h1><p class="b17n">كل ما يخص طلباتك في مكان واحد: اطلب قطعة أو خدمة، وتابع طلباتك وطلبات الشراء.</p>
-<div class="bt-g">
-<a class="bt-k" href="#requestpart"><b>أطلب قطعة</b><span>لم تجد القطعة التي تحتاجها؟ أرسل طلب قطعة غيار.</span></a>
-<a class="bt-k" href="#requestservice"><b>أطلب خدمة</b><span>أرسل طلب خدمة أو صيانة بحرية.</span></a>
-<a class="bt-k" href="#myrequests"><b>طلباتي <i data-rqc></i></b><span>تابع حالة طلبات القطع والخدمات التي أرسلتها.</span></a>
-<a class="bt-k" href="#buymine"><b>طلبات الشراء</b><span>طلبات الشراء الخاصة بك والعروض الواردة عليها.</span></a>
-<a class="bt-k" href="#bizstats"><b>إحصائيات الطلبات</b><span>إحصائيات نشاطك، وتشمل عدد عروضك على طلبات الشراء.</span></a>
-</div>
-<p class="b15h"><a class="btn" href="#buynew">+ أضف طلب شراء</a><a class="btn" href="#buyhub">الطلبات العامة</a></p>
-<h2 style="font-size:20px;margin:22px 0 10px;color:var(--nav)">لوحات إدارة الطلبات</h2>
-<div class="bt-g">
-<a class="bt-k" href="#buyboard"><b>لوحة طلبات الأنشطة</b><span>طلبات الشراء المتاحة للأنشطة التجارية المسجّلة.</span></a>
-<a class="bt-k" id="rqhA1" href="#admreq" style="display:none"><b>طلبات القطع والخدمات (مشرف)</b><span>مراجعة طلبات القطع والخدمات وتحديث حالتها.</span></a>
-<a class="bt-k" id="rqhA2" href="#admbuy" style="display:none"><b>طلبات الشراء والعروض (مشرف)</b><span>إدارة طلبات الشراء والعروض.</span></a>
-</div>
-</div></section>
-<section class="ap b17" id="ap-b50"><div id="b50c"></div></section>
-<section class="ap b17" id="ap-b52"><div id="b52c"></div></section>
-<section class="ap b17" id="ap-b19"><div id="b19c"></div></section>
-<section class="ap b17" id="ap-b20"><div id="b20c"></div></section>
-<section class="ap b17" id="ap-b21"><div id="b21c"></div></section>
-<section class="ap b17" id="ap-b22"><div id="b22c"></div></section>
-</div></div></main>
-<main id="uc" class="bgm bl"><div class="wrap"><div class="uct" id="uct"></div><div id="ucp"></div></div></main>
-<main id="pf" class="bgm bl"><div class="wrap"><div id="pfc"></div></div></main>
-<main id="sl" class="bgm bl"><div class="wrap" id="slc"></div></main>
-<main id="ip" class="bgm bl"><div class="wrap"><div id="ipc" tabindex="-1"></div></div></main>
-<main id="cx" class="bgm bl"><div class="wrap"><div id="cxc" tabindex="-1"></div></div></main>
-<main id="bt" class="bgm bl"><div class="wrap"><div id="btc" tabindex="-1"></div></div></main>
-<main id="ad" class="bgm bl"><div class="wrap">
-<div class="adg" id="adg"><p>جارٍ التحقق من الصلاحية…</p></div>
-<div class="adl" id="adl" style="display:none"><nav class="adn" id="adn" aria-label="أقسام لوحة الإدارة"><p>BAHR ADMIN</p><button type="button" class="ads on" data-s="ov">النظرة العامة</button><button type="button" class="ads" data-s="prod">الإعلانات والمنتجات</button><button type="button" class="ads" data-s="ord">الطلبات والخدمات</button><button type="button" class="ads" data-s="usr">المستخدمون والتجار</button><button type="button" class="ads" data-s="com">التواصل وخدمة العملاء</button><button type="button" class="ads" data-s="trust">مركز الثقة والمراجعة</button><button type="button" class="ads" data-s="fin">المالية والأرباح</button><button type="button" class="ads" data-s="ana">التحليلات والتسويق</button><button type="button" class="ads" data-s="plat">تعديل المنصة</button><button type="button" class="ads" data-s="sys">إعدادات النظام</button></nav>
-<div><div class="adsub" id="adsub" aria-label="صفحات القسم"><div class="adsg" data-s="ov" data-title="النظرة العامة" data-note="" role="group"><button type="button" data-t="dash">لوحة المعلومات</button><a href="#opscenter" data-d="صفحة مركز العمليات الحالية (B56).">مركز العمليات</a><button type="button" data-t="b87">متابعة المهام والمخاطر</button><button type="button" data-t="b88">مراقبة العمليات التشغيلية</button></div><div class="adsg" data-s="prod" data-title="الإعلانات والمنتجات" data-note="" role="group" hidden><button type="button" data-t="ads">مركز الإعلانات والمنتجات</button><a href="#admparts" data-d="مراجعة كتالوج القطع والعروض.">BAHR PARTS: الكتالوج والعروض</a><button type="button" data-t="pdup">جودة كتالوج القطع</button><button type="button" data-t="ref">التصنيفات والمراجع</button></div><div class="adsg" data-s="ord" data-title="الطلبات والخدمات" data-note="مركز موحّد للقراءة والمتابعة وتحديث الحالة، وبجانبه صفحات الإدارة الحالية." role="group" hidden><button type="button" data-t="ord5">مركز الطلبات والخدمات</button><a href="#admreq" data-d="رقم الطلب والحالة وبيانات التواصل مع البحث والفلاتر.">طلبات القطع والخدمات</a><a href="#admbuy" data-d="إدارة طلبات الشراء والعروض.">طلبات الشراء والعروض</a><a href="#admsvc" data-d="إدارة الخدمات البحرية.">الخدمات البحرية</a></div><div class="adsg" data-s="usr" data-title="المستخدمون والتجار" data-note="" role="group" hidden><button type="button" data-t="u3">مركز المستخدمين والتجار</button><button type="button" data-t="users">المستخدمون والحسابات</button><button type="button" data-t="b74">إدارة الحسابات وطلبات الحذف</button><button type="button" data-t="stores">المتاجر والموردون</button><button type="button" data-t="workshops">الورش والفنيون</button><a href="#admbiz" data-d="قرارات قبول الأنشطة التجارية وتوثيقها.">إدارة الأنشطة (قرارات)</a></div><div class="adsg" data-s="com" data-title="التواصل وخدمة العملاء" data-note="مركز موحّد للقراءة والتنقل، وبجانبه صفحات الدعم والبلاغات الحالية." role="group" hidden><button type="button" data-t="com6">مركز التواصل وخدمة العملاء</button><a href="#admsupport" data-d="تذاكر الدعم والشكاوى.">الدعم الفني والشكاوى</a><button type="button" data-t="convrep">بلاغات المحادثات</button><button type="button" data-t="ntf">الإشعارات</button></div><div class="adsg" data-s="trust" data-title="مركز الثقة والمراجعة" data-note="" role="group" hidden><button type="button" data-t="trust">مركز الثقة (الرئيسية)</button><button type="button" data-t="reps">بلاغات الإعلانات والمستخدمين</button><a href="#admpartrep" data-d="بلاغات قطع الغيار.">بلاغات القطع</a><button type="button" data-t="verif">التحقق والمراجعة</button><a href="#admreviews" data-d="مراجعة تقييمات الأنشطة.">مراجعة التقييمات</a><a href="#admrisk" data-d="مؤشرات الأمان والمخاطر (B58).">مركز الأمان والمخاطر</a></div><div class="adsg" data-s="fin" data-title="المالية والأرباح" data-note="الإيرادات والسجل والتقارير تُقرأ من مدفوعات باقات المنشورات (B55) فقط. الترويج والحملات والطلبات والرعاة واجهات بلا تخزين بعد. لا توجد بوابة دفع. هذا القسم للمدير العام فقط." role="group" hidden><button type="button" data-t="f81">ملخص الإيرادات</button><button type="button" data-t="f82">خيارات الترويج</button><button type="button" data-t="f83">الحملات والإعلانات الممولة</button><button type="button" data-t="f84">السجل المالي</button><button type="button" data-t="f85">طلبات الترويج</button><button type="button" data-t="f86">الرعاة والشركاء</button><button type="button" data-t="f87">التقارير والتصدير</button><a href="#admpay" data-d="قبول المدفوعات أو رفضها أو طلب معلومات إضافية.">مراجعة المدفوعات</a></div><div class="adsg" data-s="ana" data-title="التحليلات والتسويق" data-note="كل رقم هنا من بيانات المنصة الفعلية. ما لا يُقاس بعد (الزيارات والمصادر ونقرات الاتصال والحملات) يظهر «غير متاح» مع المطلوب لتفعيله. للمدير العام فقط." role="group" hidden><button type="button" data-t="an1">لوحة التحليلات</button><button type="button" data-t="an2">مصادر الزيارات</button><button type="button" data-t="an3">روابط الحملات</button><button type="button" data-t="an4">أداء الإعلانات</button><button type="button" data-t="an5">رحلة الزائر</button><button type="button" data-t="an6">المناطق والفئات</button><a href="#admstats" data-d="إحصائيات المنصة الحالية.">إحصائيات المنصة</a></div><div class="adsg" data-s="plat" data-title="تعديل المنصة" data-note="" role="group" hidden><button type="button" data-t="site">واجهة الموقع والأقسام</button><button type="button" data-t="b72">إعدادات المنصة</button><a href="#admcms" data-d="محرر المحتوى والصفحات والأسئلة الشائعة (B59).">محرر المحتوى</a><button type="button" data-t="cnt">المحتوى والأسئلة الشائعة</button><button type="button" data-t="fil">الملفات والصور</button></div><div class="adsg" data-s="sys" data-title="إعدادات النظام" data-note="مركز واحد للإعدادات العامة وصحة النظام والأخطاء وسجل النشاط والنسخ والصيانة. ما لا يدعمه النظام يظهر «غير مدعوم» أو «غير متحقق منه». للمدير العام فقط." role="group" hidden><button type="button" data-t="sy1">الإعدادات العامة</button><button type="button" data-t="sy2">إعدادات التواصل</button><button type="button" data-t="sy3">إعدادات المنصة</button><button type="button" data-t="sy4">صحة النظام</button><button type="button" data-t="qa">الأخطاء والحوادث</button><button type="button" data-t="audit">سجل النشاط الإداري</button><button type="button" data-t="b91">النسخ الاحتياطي والاستعادة</button><button type="button" data-t="sy8">الصيانة وحالة الخدمات</button><span class="adsx">صفحات إضافية:</span><button type="button" data-t="set">الأدوار الإدارية</button><button type="button" data-t="monitor">مراقبة الحالة</button><button type="button" data-t="perf">أداء المنصة وصحتها</button><button type="button" data-t="b90">مركز سلامة البيانات</button></div></div><div class="admsg" id="admsg" role="status"></div><section class="adm" id="adm"></section></div></div>
-<div id="adx" role="dialog" aria-modal="true" aria-label="التفاصيل"><div class="dw" id="adw"></div></div>
-</div></main>
-<div id="dt" role="dialog" aria-modal="true" aria-label="تفاصيل المنتج"><div class="dw" id="dw"></div></div>
-<footer class="bgm bw"><div class="wrap">
-  <div class="fr"><img src="logo-white.png" alt="بحر"><span>بحر ... أكثر من مجرد منصة</span>
+  <main id="mk" class="bgm bl">
+    <div class="wrap">
+      <h1>السوق البحري</h1>
+      <p class="mk-s">تصفّح القوارب والجت سكي والمحركات وقطع الغيار والمعدات البحرية.</p>
+      <div class="demo" id="dm" style="display:none"><b>بيانات تجريبية:</b> تعذّر تحميل الإعلانات من قاعدة البيانات (أو
+        لم تُجهَّز بعد)، لذلك تُعرض أمثلة للتصميم فقط. الإعلانات والأسعار والبائعون المعروضون هنا للتصميم فقط، وليست
+        إعلانات حقيقية. الصور من Pexels وهي توضيحية.</div>
+      <div class="tabs" id="tabs"></div>
+      <form class="fb" id="fb" onsubmit="return false">
+        <label class="wide">بحث<input id="q" type="search" maxlength="80"
+            placeholder="الاسم أو الشركة أو الموديل أو السنة أو رقم القطعة/التسلسلي"></label>
+        <label>المحافظة<select id="pv">
+            <option value="">كل المحافظات</option>
+          </select></label>
+        <label>الحالة<select id="cd">
+            <option value="">الكل</option>
+            <option>جديد</option>
+            <option>مستعمل</option>
+          </select></label>
+        <label>الشركة المصنعة<select id="mf">
+            <option value="">الكل</option>
+          </select></label>
+        <label>الموديل<input id="md" placeholder="مثال: VX"></label>
+        <div class="pr" id="yrw"><label>السنة من<input id="y1" type="number" min="1950" max="2100"
+              inputmode="numeric"></label><label>إلى<input id="y2" type="number" min="1950" max="2100"
+              inputmode="numeric"></label></div>
+        <label id="hpw" style="display:none">القدرة (حصان) من<input id="hp" type="number" min="0"
+            inputmode="numeric"></label>
+        <div class="pr"><label>السعر من<input id="p1" type="number" min="0" inputmode="numeric"></label><label>إلى<input
+              id="p2" type="number" min="0" inputmode="numeric"></label></div>
+        <label>العملة (لنطاق السعر)<select id="cu">
+            <option value="USD">دولار ($)</option>
+            <option value="IQD">دينار (د.ع)</option>
+          </select></label>
+        <label>الترتيب<select id="so">
+            <option value="">الأحدث</option>
+            <option value="a">السعر: الأقل</option>
+            <option value="d">السعر: الأعلى</option>
+          </select></label>
+        <button class="rs" id="sv-s" type="button">حفظ هذا البحث</button>
+        <button class="rs" id="rs" type="button">مسح التصفية</button>
+      </form>
+      <p class="cnt" id="cnt2" role="status" aria-live="polite"></p>
+      <div class="mg" id="mg"></div>
     </div>
-  <div class="fgs"><div><h4>اكتشف</h4><a href="#market">السوق البحري</a><a href="#requests">أطلب اللي تحتاجه</a><a href="#stores">المتاجر والموردون</a><a href="#services">الورش والخدمات</a><a href="#parts">BAHR PARTS</a><a href="#find">البحث</a></div><div><h4>حسابك</h4><a href="#account">حسابي</a><a href="#favorites">المفضلة</a><a href="#myrequests">طلباتي</a><a href="#inbox">الرسائل</a><a href="#alerts">التنبيهات</a></div><div><h4>بحر</h4><a href="#about">من نحن</a><a href="#howitworks">كيف تعمل المنصة</a><a href="#sellerguide">دليل البائع</a><a href="#faq">الأسئلة الشائعة</a><a href="#safety">السلامة والثقة</a><a href="#help">مركز المساعدة</a><a href="#contact">تواصل معنا</a><a href="#terms">الشروط والأحكام</a><a href="#privacy">سياسة الخصوصية</a></div></div>
-  <div class="fl"><span>جميع الحقوق محفوظة © 2025 بحر</span></div>
-  <p class="st" id="st" data-s=""><i></i><span>جارٍ فحص الاتصال بـ Supabase…</span></p>
-</div></footer>
-<div id="toast" role="status" aria-live="polite"></div>
+  </main>
+  <main id="sv" class="bgm bl">
+    <div class="wrap">
+      <h1>الخدمات البحرية والورش والفنيون</h1>
+      <p class="sv-s mk-s">ابحث عن ورشة أو فني لصيانة الجت سكي والمحركات والقوارب وتشخيص الأعطال.</p>
+      <div class="demo" id="ds" style="display:none"><b>بيانات تجريبية:</b> تعذّر تحميل الخدمات من قاعدة البيانات (أو لم
+        تُجهَّز بعد)، لذلك تُعرض أمثلة للتصميم فقط. الورش والفنيون المعروضون هنا للتصميم فقط، وليسوا مقدمي خدمة حقيقيين.
+        لا توجد أسماء أو أرقام هواتف أو تقييمات حقيقية. الصور من Pexels وهي توضيحية.</div>
+      <div class="tabs" id="stabs"></div>
+      <form class="fb" id="sfb" onsubmit="return false">
+        <label class="wide">بحث<input id="sq" type="search" placeholder="اسم الورشة أو الفني أو الخدمة"></label>
+        <label>المحافظة<select id="spv">
+            <option value="">كل المحافظات</option>
+          </select></label>
+        <label>المنطقة<select id="sar">
+            <option value="">كل المناطق</option>
+          </select></label>
+        <label>نوع المحرك أو المعدة<select id="seq">
+            <option value="">الكل</option>
+          </select></label>
+        <button class="rs" id="srs" type="button">مسح التصفية</button>
+      </form>
+      <p class="cnt" id="scnt" role="status" aria-live="polite"></p>
+      <div class="mg" id="smg"></div>
+    </div>
+  </main>
+  <div id="sd" role="dialog" aria-modal="true" aria-label="تفاصيل مقدم الخدمة">
+    <div class="dw" id="sdw"></div>
+  </div>
+  <main id="au" class="bgm bl">
+    <div class="wrap">
+      <div class="au-c">
+        <img class="lg" src="logo-blue.png" alt="بحر">
+        <section class="ap" id="ap-denied"></section>
+        <section class="ap" id="ap-load">
+          <p class="sub">جارٍ التحقق من حالة الحساب…</p>
+        </section>
+        <section class="ap" id="ap-login">
+          <h1>تسجيل الدخول</h1>
+          <p class="sub">أهلاً بك في بحر</p>
+          <div class="msg" role="alert"></div>
+          <form id="f-login" novalidate><label>رقم الهاتف<input id="l-e" type="tel" inputmode="tel"
+                autocomplete="username" dir="ltr" placeholder="07701234567" required><span class="fe"
+                data-e="l-e"></span></label><label>كلمة المرور<div class="pw"><input id="l-p" type="password"
+                  autocomplete="current-password" required><button type="button" class="eye"
+                  aria-label="إظهار كلمة المرور"></button></div><span class="fe" data-e="l-p"></span></label><label
+              class="chk"><input type="checkbox" id="l-r" checked><span>تذكرني</span></label><button class="btn"
+              type="submit">دخول</button></form>
+          <div class="lnk"><a href="#forgot">نسيت كلمة المرور؟</a><a href="#signup">إنشاء حساب جديد</a></div>
+        </section>
+        <section class="ap" id="ap-signup">
+          <h1>إنشاء حساب جديد</h1>
+          <p class="sub">سجّل لتنضم إلى مجتمع بحر</p>
+          <div class="msg" role="alert"></div>
+          <form id="f-signup" novalidate><label>الاسم الكامل<input id="s-n" autocomplete="name" required><span
+                class="fe" data-e="s-n"></span></label><label>رقم الهاتف<input id="s-ph" type="tel" inputmode="tel"
+                autocomplete="tel" dir="ltr" placeholder="07701234567" required><span class="fe"
+                data-e="s-ph"></span></label><label>البريد الإلكتروني (اختياري)<input id="s-e" type="email"
+                inputmode="email" autocomplete="email" dir="ltr"><span class="fe"
+                data-e="s-e"></span></label><label>كلمة المرور (8 أحرف على الأقل)<div class="pw"><input id="s-p"
+                  type="password" autocomplete="new-password" required><button type="button" class="eye"
+                  aria-label="إظهار كلمة المرور"></button></div><span class="fe"
+                data-e="s-p"></span></label><label>تأكيد كلمة المرور<div class="pw"><input id="s-p2" type="password"
+                  autocomplete="new-password" required><button type="button" class="eye"
+                  aria-label="إظهار كلمة المرور"></button></div><span class="fe" data-e="s-p2"></span></label><label
+              class="chk"><input type="checkbox" id="s-t"><span>أوافق على <a href="#terms" target="_blank">الشروط
+                  والأحكام</a> و<a href="#privacy" target="_blank">سياسة الخصوصية</a></span></label><span class="fe"
+              data-e="s-t"></span><button class="btn" type="submit">إنشاء الحساب</button></form>
+          <div class="lnk"><span>لديك حساب؟</span><a href="#login">تسجيل الدخول</a></div>
+        </section>
+        <section class="ap" id="ap-forgot">
+          <h1>استعادة كلمة المرور</h1>
+          <p class="sub">أدخل بريدك الإلكتروني المسجّل وسنرسل لك رابط الاستعادة. إن سجّلت برقم الهاتف فقط فلا تتوفر
+            استعادة تلقائية حالياً، تواصل معنا من صفحة «تواصل معنا».</p>
+          <div class="msg" role="alert"></div>
+          <form id="f-forgot" novalidate><label>البريد الإلكتروني<input id="f-e" type="email" inputmode="email"
+                autocomplete="email" dir="ltr" required><span class="fe" data-e="f-e"></span></label><button class="btn"
+              type="submit">إرسال الرابط</button></form>
+          <div class="lnk"><a href="#login">العودة لتسجيل الدخول</a></div>
+        </section>
+        <section class="ap" id="ap-reset">
+          <h1>كلمة مرور جديدة</h1>
+          <p class="sub">اختر كلمة مرور جديدة لحسابك</p>
+          <div class="msg" role="alert"></div>
+          <form id="f-reset" novalidate><label>كلمة المرور الجديدة<div class="pw"><input id="r-p" type="password"
+                  autocomplete="new-password" required><button type="button" class="eye"
+                  aria-label="إظهار كلمة المرور"></button></div><span class="fe"
+                data-e="r-p"></span></label><label>تأكيد كلمة المرور<div class="pw"><input id="r-p2" type="password"
+                  autocomplete="new-password" required><button type="button" class="eye"
+                  aria-label="إظهار كلمة المرور"></button></div><span class="fe" data-e="r-p2"></span></label><button
+              class="btn" type="submit">حفظ كلمة المرور</button></form>
+        </section>
+        <section class="ap" id="ap-account">
+          <h1>حسابي</h1>
+          <div class="msg" role="alert"></div>
+          <div id="acc"></div>
+          <form id="f-rec" novalidate hidden><label>بريد للاستعادة (اختياري)<input id="rc-e" type="email"
+                inputmode="email" autocomplete="email" dir="ltr"><span class="fe" data-e="rc-e"></span></label>
+            <p class="hint" style="margin:0 0 8px;font-size:13px">سنرسل رابط تأكيد إلى هذا البريد. بعد تأكيده تستطيع
+              استعادة كلمة المرور به.</p><button class="btn" type="submit">إضافة البريد</button>
+          </form>
+          <p style="margin:16px 0 0"><button class="btn" data-act="logout" type="button">تسجيل الخروج</button></p>
+          <div class="lnk"><a href="#newlisting">إضافة إعلان</a><a href="#mylistings">إعلاناتي</a><a
+              href="#requests">أطلب اللي تحتاجه</a><a href="#parts">قطع الغيار BAHR PARTS</a><a href="#inbox">BAHR
+              CONNECT — الرسائل</a><a href="#business">BAHR BUSINESS — حساب النشاط التجاري</a><a href="#profile">ملفي
+              الشخصي</a><a href="#favorites">المفضلة</a><a href="#searches">بحوثي المحفوظة</a><a
+              href="#alerts">التنبيهات</a><a href="#market">السوق البحري</a><a href="#services">الخدمات والورش</a></div>
+        </section>
+        <section class="ap b17" id="ap-b17">
+          <div id="b17c"></div>
+        </section>
+        <section class="ap b17" id="ap-b55">
+          <div id="b55c"></div>
+        </section>
+        <section class="ap b17" id="ap-b56">
+          <div id="b56c"></div>
+        </section>
+        <section class="ap b17" id="ap-b57">
+          <div id="b57c"></div>
+        </section>
+        <section class="ap b17" id="ap-b58">
+          <div id="b58c"></div>
+        </section>
+        <section class="ap b17" id="ap-b59">
+          <div id="b59c"></div>
+        </section>
+        <section class="ap b17" id="ap-b59p">
+          <div id="b59p"></div>
+        </section>
+        <section class="ap b17" id="ap-b60">
+          <div id="b60c"></div>
+        </section>
+        <section class="ap b17" id="ap-b15">
+          <div id="b15c"></div>
+        </section>
+        <section class="ap b17" id="ap-b49">
+          <div id="b49c"></div>
+        </section>
+        <section class="ap b17" id="ap-b62">
+          <div id="b62c"></div>
+        </section>
+        <section class="ap b17" id="ap-rqh" style="max-width:980px">
+          <div id="rqhc">
+            <h1>أطلب اللي تحتاجه</h1>
+            <p class="b17n">كل ما يخص طلباتك في مكان واحد: اطلب قطعة أو خدمة، وتابع طلباتك وطلبات الشراء.</p>
+            <div class="bt-g">
+              <a class="bt-k" href="#requestpart"><b>أطلب قطعة</b><span>لم تجد القطعة التي تحتاجها؟ أرسل طلب قطعة
+                  غيار.</span></a>
+              <a class="bt-k" href="#requestservice"><b>أطلب خدمة</b><span>أرسل طلب خدمة أو صيانة بحرية.</span></a>
+              <a class="bt-k" href="#myrequests"><b>طلباتي <i data-rqc></i></b><span>تابع حالة طلبات القطع والخدمات التي
+                  أرسلتها.</span></a>
+              <a class="bt-k" href="#buymine"><b>طلبات الشراء</b><span>طلبات الشراء الخاصة بك والعروض الواردة
+                  عليها.</span></a>
+              <a class="bt-k" href="#bizstats"><b>إحصائيات الطلبات</b><span>إحصائيات نشاطك، وتشمل عدد عروضك على طلبات
+                  الشراء.</span></a>
+            </div>
+            <p class="b15h"><a class="btn" href="#buynew">+ أضف طلب شراء</a><a class="btn" href="#buyhub">الطلبات
+                العامة</a></p>
+            <h2 style="font-size:20px;margin:22px 0 10px;color:var(--nav)">لوحات إدارة الطلبات</h2>
+            <div class="bt-g">
+              <a class="bt-k" href="#buyboard"><b>لوحة طلبات الأنشطة</b><span>طلبات الشراء المتاحة للأنشطة التجارية
+                  المسجّلة.</span></a>
+              <a class="bt-k" id="rqhA1" href="#admreq" style="display:none"><b>طلبات القطع والخدمات
+                  (مشرف)</b><span>مراجعة طلبات القطع والخدمات وتحديث حالتها.</span></a>
+              <a class="bt-k" id="rqhA2" href="#admbuy" style="display:none"><b>طلبات الشراء والعروض
+                  (مشرف)</b><span>إدارة طلبات الشراء والعروض.</span></a>
+            </div>
+          </div>
+        </section>
+        <section class="ap b17" id="ap-b50">
+          <div id="b50c"></div>
+        </section>
+        <section class="ap b17" id="ap-b52">
+          <div id="b52c"></div>
+        </section>
+        <section class="ap b17" id="ap-b19">
+          <div id="b19c"></div>
+        </section>
+        <section class="ap b17" id="ap-b20">
+          <div id="b20c"></div>
+        </section>
+        <section class="ap b17" id="ap-b21">
+          <div id="b21c"></div>
+        </section>
+        <section class="ap b17" id="ap-b22">
+          <div id="b22c"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+  <main id="uc" class="bgm bl">
+    <div class="wrap">
+      <div class="uct" id="uct"></div>
+      <div id="ucp"></div>
+    </div>
+  </main>
+  <main id="pf" class="bgm bl">
+    <div class="wrap">
+      <div id="pfc"></div>
+    </div>
+  </main>
+  <main id="sl" class="bgm bl">
+    <div class="wrap" id="slc"></div>
+  </main>
+  <main id="ip" class="bgm bl">
+    <div class="wrap">
+      <div id="ipc" tabindex="-1"></div>
+    </div>
+  </main>
+  <main id="cx" class="bgm bl">
+    <div class="wrap">
+      <div id="cxc" tabindex="-1"></div>
+    </div>
+  </main>
+  <main id="bt" class="bgm bl">
+    <div class="wrap">
+      <div id="btc" tabindex="-1"></div>
+    </div>
+  </main>
+  <main id="ad" class="bgm bl">
+    <div class="wrap">
+      <div class="adg" id="adg">
+        <p>جارٍ التحقق من الصلاحية…</p>
+      </div>
+      <div class="adl" id="adl" style="display:none">
+        <nav class="adn" id="adn" aria-label="أقسام لوحة الإدارة">
+          <p>BAHR ADMIN</p><button type="button" class="ads on" data-s="ov">النظرة العامة</button><button type="button"
+            class="ads" data-s="prod">الإعلانات والمنتجات</button><button type="button" class="ads" data-s="ord">الطلبات
+            والخدمات</button><button type="button" class="ads" data-s="usr">المستخدمون والتجار</button><button
+            type="button" class="ads" data-s="com">التواصل وخدمة العملاء</button><button type="button" class="ads"
+            data-s="trust">مركز الثقة والمراجعة</button><button type="button" class="ads" data-s="fin">المالية
+            والأرباح</button><button type="button" class="ads" data-s="ana">التحليلات والتسويق</button><button
+            type="button" class="ads" data-s="plat">تعديل المنصة</button><button type="button" class="ads"
+            data-s="sys">إعدادات النظام</button>
+        </nav>
+        <div>
+          <div class="adsub" id="adsub" aria-label="صفحات القسم">
+            <div class="adsg" data-s="ov" data-title="النظرة العامة" data-note="" role="group"><button type="button"
+                data-t="dash">لوحة المعلومات</button><a href="#opscenter"
+                data-d="صفحة مركز العمليات الحالية (B56).">مركز العمليات</a><button type="button" data-t="b87">متابعة
+                المهام والمخاطر</button><button type="button" data-t="b88">مراقبة العمليات التشغيلية</button></div>
+            <div class="adsg" data-s="prod" data-title="الإعلانات والمنتجات" data-note="" role="group" hidden><button
+                type="button" data-t="ads">مركز الإعلانات والمنتجات</button><a href="#admparts"
+                data-d="مراجعة كتالوج القطع والعروض.">BAHR PARTS: الكتالوج والعروض</a><button type="button"
+                data-t="pdup">جودة كتالوج القطع</button><button type="button" data-t="ref">التصنيفات والمراجع</button>
+            </div>
+            <div class="adsg" data-s="ord" data-title="الطلبات والخدمات"
+              data-note="مركز موحّد للقراءة والمتابعة وتحديث الحالة، وبجانبه صفحات الإدارة الحالية." role="group"
+              hidden><button type="button" data-t="ord5">مركز الطلبات والخدمات</button><a href="#admreq"
+                data-d="رقم الطلب والحالة وبيانات التواصل مع البحث والفلاتر.">طلبات القطع والخدمات</a><a href="#admbuy"
+                data-d="إدارة طلبات الشراء والعروض.">طلبات الشراء والعروض</a><a href="#admsvc"
+                data-d="إدارة الخدمات البحرية.">الخدمات البحرية</a></div>
+            <div class="adsg" data-s="usr" data-title="المستخدمون والتجار" data-note="" role="group" hidden><button
+                type="button" data-t="u3">مركز المستخدمين والتجار</button><button type="button"
+                data-t="users">المستخدمون والحسابات</button><button type="button" data-t="b74">إدارة الحسابات وطلبات
+                الحذف</button><button type="button" data-t="stores">المتاجر والموردون</button><button type="button"
+                data-t="workshops">الورش والفنيون</button><a href="#admbiz"
+                data-d="قرارات قبول الأنشطة التجارية وتوثيقها.">إدارة الأنشطة (قرارات)</a></div>
+            <div class="adsg" data-s="com" data-title="التواصل وخدمة العملاء"
+              data-note="مركز موحّد للقراءة والتنقل، وبجانبه صفحات الدعم والبلاغات الحالية." role="group" hidden><button
+                type="button" data-t="com6">مركز التواصل وخدمة العملاء</button><a href="#admsupport"
+                data-d="تذاكر الدعم والشكاوى.">الدعم الفني والشكاوى</a><button type="button" data-t="convrep">بلاغات
+                المحادثات</button><button type="button" data-t="ntf">الإشعارات</button></div>
+            <div class="adsg" data-s="trust" data-title="مركز الثقة والمراجعة" data-note="" role="group" hidden><button
+                type="button" data-t="trust">مركز الثقة (الرئيسية)</button><button type="button" data-t="reps">بلاغات
+                الإعلانات والمستخدمين</button><a href="#admpartrep" data-d="بلاغات قطع الغيار.">بلاغات القطع</a><button
+                type="button" data-t="verif">التحقق والمراجعة</button><a href="#admreviews"
+                data-d="مراجعة تقييمات الأنشطة.">مراجعة التقييمات</a><a href="#admrisk"
+                data-d="مؤشرات الأمان والمخاطر (B58).">مركز الأمان والمخاطر</a></div>
+            <div class="adsg" data-s="fin" data-title="المالية والأرباح"
+              data-note="الإيرادات والسجل والتقارير تُقرأ من مدفوعات باقات المنشورات (B55) فقط. الترويج والحملات والطلبات والرعاة واجهات بلا تخزين بعد. لا توجد بوابة دفع. هذا القسم للمدير العام فقط."
+              role="group" hidden><button type="button" data-t="f81">ملخص الإيرادات</button><button type="button"
+                data-t="f82">خيارات الترويج</button><button type="button" data-t="f83">الحملات والإعلانات
+                الممولة</button><button type="button" data-t="f84">السجل المالي</button><button type="button"
+                data-t="f85">طلبات الترويج</button><button type="button" data-t="f86">الرعاة والشركاء</button><button
+                type="button" data-t="f87">التقارير والتصدير</button><a href="#admpay"
+                data-d="قبول المدفوعات أو رفضها أو طلب معلومات إضافية.">مراجعة المدفوعات</a></div>
+            <div class="adsg" data-s="ana" data-title="التحليلات والتسويق"
+              data-note="كل رقم هنا من بيانات المنصة الفعلية. ما لا يُقاس بعد (الزيارات والمصادر ونقرات الاتصال والحملات) يظهر «غير متاح» مع المطلوب لتفعيله. للمدير العام فقط."
+              role="group" hidden><button type="button" data-t="an1">لوحة التحليلات</button><button type="button"
+                data-t="an2">مصادر الزيارات</button><button type="button" data-t="an3">روابط الحملات</button><button
+                type="button" data-t="an4">أداء الإعلانات</button><button type="button" data-t="an5">رحلة
+                الزائر</button><button type="button" data-t="an6">المناطق والفئات</button><a href="#admstats"
+                data-d="إحصائيات المنصة الحالية.">إحصائيات المنصة</a></div>
+            <div class="adsg" data-s="plat" data-title="تعديل المنصة" data-note="" role="group" hidden><button
+                type="button" data-t="site">واجهة الموقع والأقسام</button><button type="button" data-t="b72">إعدادات
+                المنصة</button><a href="#admcms" data-d="محرر المحتوى والصفحات والأسئلة الشائعة (B59).">محرر
+                المحتوى</a><button type="button" data-t="cnt">المحتوى والأسئلة الشائعة</button><button type="button"
+                data-t="fil">الملفات والصور</button></div>
+            <div class="adsg" data-s="sys" data-title="إعدادات النظام"
+              data-note="مركز واحد للإعدادات العامة وصحة النظام والأخطاء وسجل النشاط والنسخ والصيانة. ما لا يدعمه النظام يظهر «غير مدعوم» أو «غير متحقق منه». للمدير العام فقط."
+              role="group" hidden><button type="button" data-t="sy1">الإعدادات العامة</button><button type="button"
+                data-t="sy2">إعدادات التواصل</button><button type="button" data-t="sy3">إعدادات المنصة</button><button
+                type="button" data-t="sy4">صحة النظام</button><button type="button" data-t="qa">الأخطاء
+                والحوادث</button><button type="button" data-t="audit">سجل النشاط الإداري</button><button type="button"
+                data-t="b91">النسخ الاحتياطي والاستعادة</button><button type="button" data-t="sy8">الصيانة وحالة
+                الخدمات</button><span class="adsx">صفحات إضافية:</span><button type="button" data-t="set">الأدوار
+                الإدارية</button><button type="button" data-t="monitor">مراقبة الحالة</button><button type="button"
+                data-t="perf">أداء المنصة وصحتها</button><button type="button" data-t="b90">مركز سلامة البيانات</button>
+            </div>
+          </div>
+          <div class="admsg" id="admsg" role="status"></div>
+          <section class="adm" id="adm"></section>
+        </div>
+      </div>
+      <div id="adx" role="dialog" aria-modal="true" aria-label="التفاصيل">
+        <div class="dw" id="adw"></div>
+      </div>
+    </div>
+  </main>
+  <div id="dt" role="dialog" aria-modal="true" aria-label="تفاصيل المنتج">
+    <div class="dw" id="dw"></div>
+  </div>
+  <footer class="bgm bw">
+    <div class="wrap">
+      <div class="fr"><img src="logo-white.png" alt="بحر"><span>بحر ... أكثر من مجرد منصة</span>
+      </div>
+      <div class="fgs">
+        <div>
+          <h4>اكتشف</h4><a href="#market">السوق البحري</a><a href="#requests">أطلب اللي تحتاجه</a><a
+            href="#stores">المتاجر والموردون</a><a href="#services">الورش والخدمات</a><a href="#parts">BAHR PARTS</a><a
+            href="#find">البحث</a>
+        </div>
+        <div>
+          <h4>حسابك</h4><a href="#account">حسابي</a><a href="#favorites">المفضلة</a><a href="#myrequests">طلباتي</a><a
+            href="#inbox">الرسائل</a><a href="#alerts">التنبيهات</a>
+        </div>
+        <div>
+          <h4>بحر</h4><a href="#about">من نحن</a><a href="#howitworks">كيف تعمل المنصة</a><a href="#sellerguide">دليل
+            البائع</a><a href="#faq">الأسئلة الشائعة</a><a href="#safety">السلامة والثقة</a><a href="#help">مركز
+            المساعدة</a><a href="#contact">تواصل معنا</a><a href="#terms">الشروط والأحكام</a><a href="#privacy">سياسة
+            الخصوصية</a>
+        </div>
+      </div>
+      <div class="fl"><span>جميع الحقوق محفوظة © 2025 بحر</span></div>
+      <p class="st" id="st" data-s=""><i></i><span>جارٍ فحص الاتصال بـ Supabase…</span></p>
+    </div>
+  </footer>
+  <div id="toast" role="status" aria-live="polite"></div>
 
 
-<div id="intro" role="dialog" aria-modal="true" aria-label="أهلاً بك في بحر" hidden>
-<video id="inV" muted playsinline preload="none" poster="bahr-intro-poster.jpg" aria-hidden="true"></video>
-<div class="in-t"><img class="in-logo" src="logo-white.png" alt="بحر" onerror="this.style.display='none'">
-<div class="in-bot"><p class="in-cap"><b>بحر</b>… كل شي يخص البحر بمكان واحد.</p>
-<button class="in-go" id="inGo" type="button">الدخول إلى بحر</button>
-<button class="in-rp" id="inRp" type="button">مشكلة في تشغيل الفيديو؟ أبلغنا</button></div></div>
-<div class="in-bar" aria-hidden="true"><i id="inBar"></i></div></div>
+  <div id="intro" role="dialog" aria-modal="true" aria-label="أهلاً بك في بحر" hidden>
+    <video id="inV" muted playsinline preload="none" poster="bahr-intro-poster.jpg" aria-hidden="true"></video>
+    <div class="in-t"><img class="in-logo" src="logo-white.png" alt="بحر" onerror="this.style.display='none'">
+      <div class="in-bot">
+        <p class="in-cap"><b>بحر</b>… كل شي يخص البحر بمكان واحد.</p>
+        <button class="in-go" id="inGo" type="button">الدخول إلى بحر</button>
+        <button class="in-rp" id="inRp" type="button">مشكلة في تشغيل الفيديو؟ أبلغنا</button>
+      </div>
+    </div>
+    <div class="in-bar" aria-hidden="true"><i id="inBar"></i></div>
+  </div>
 
 
 
 
 
 
-<!-- 4) منطق التطبيق (يُحمَّل أخيراً بعد بناء الواجهة) -->
-<script src="admin-media.js"></script>
-<script src="app.js"></script>
+  <!-- 4) منطق التطبيق (يُحمَّل أخيراً بعد بناء الواجهة) -->
+  <script src="admin-media.js"></script>
+  <script src="app.js"></script>
 </body>
+
 </html>
