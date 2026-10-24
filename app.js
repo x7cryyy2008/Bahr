@@ -380,17 +380,18 @@
     if (document.querySelector('#admTeamPage')) {
         BahrTeam.mount({ root: '#admTeamPage', trigger: '#admTeamBtn', hideWhileOpen: '#admTeamClose' });
     }
-    
-    const admBtn = document.getElementById('admTeamBtn');
+       const admBtn = document.getElementById('admTeamBtn');
     if (admBtn) {
         admBtn.style.display = '';
     }
 }
 
-  w.BahrNotify = { mount: mount, mountPage: mountPage, refresh: load, push: push, unread: unread };
+w.BahrNotify = { mount: mount, mountPage: mountPage, refresh: load, push: push, unread: unread };
 })(window, document);
 
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bahrBoot); else bahrBoot();
+
+
 /* ===== ADM11 — BahrNotify: وحدة إشعارات مستقلة (الصقها كما هي في نهاية app.js) =====
    - مستقلة تماماً: تحقن تنسيقها بنفسها (بادئة bnx-) ولا تحتاج تعديل style.css.
    - لا تلمس نظام B45: ممنوع ربطها بـ #bell أو #bc أو #nfp (ترفض ذلك تلقائياً). أضف زرّاً جديداً بـ ID جديد.
