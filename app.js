@@ -366,15 +366,30 @@
     return true;
   }
   function mountPage(sel) {
-    var r = d.querySelector(sel);
-    if (!cfg || !r) { console.warn('BahrNotify: استدعِ mount أولاً وتأكد من وجود العنصر', sel); return false; }
-    r.classList.add('bnx-v', 'bnx-pg'); attach(r); views.push({ root: r, page: true }); paint();
-    return true;
-  function bahrBoot() {
-    // تشغيل الإشعارات بأمان
-    if (document.querySelector('#admNtfBell')) {
-        BahrNotify.mount({ bell: '#admNtfBell' });
-    }
+    /* ===== نهاية وحدة BahrTeam (استبدل بها كل ما بعد سطر function mount في BahrTeam) ===== */
+  w.BahrTeam = { mount: mount, open: open, close: close, refresh: load };
+})(window, document);
+
+/* ===== تشغيل آمن للوحدات: لا ينهار إذا العنصر مفقود ===== */
+(function (w, d) {
+  'use strict';
+  function safe(fn) { try { fn(); } catch (e) { console.warn('BAHR boot:', e); } }
+  function boot() {
+    safe(function () {
+      if (w.BahrNotify && d.querySelector('#admNtfBell')) w.BahrNotify.mount({ bell: '#admNtfBell' });
+    });
+    safe(function () {
+      if (w.BahrTeam && d.querySelector('#admTeamPage')) {
+        if (w.BahrTeam.mount({ root: '#admTeamPage', trigger: '#admTeamBtn' })) {
+          var b = d.getElementById('admTeamBtn');
+          if (b) b.style.display = '';
+        }
+      }
+    });
+  }
+  if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})(window, document);
     
     // تشغيل فريق العمل أو لوحة الإدارة بأمان إذا وجد العنصر
     if (document.querySelector('#admTeamPage')) {
